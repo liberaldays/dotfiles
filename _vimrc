@@ -338,10 +338,10 @@ endfunction
 " quickrun.vim{{{
 let g:quickrun_config = {
             \ 'tex' : {
-            \   'command' : 'latexmk -c',
+            \   'command' : 'latexmk',
             \   'outputter' : 'error',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c']
+            \   'exec': ['-c %c']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
