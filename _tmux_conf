@@ -1,0 +1,42 @@
+set-option -g prefix C-s
+unbind-key C-b
+bind-key C-s send-prefix
+if "test -n '$SSH_CONNECTION'" "set-option -g prefix C-g"
+if "test -n '$SSH_CONNECTION'" "unbind-key C-s"
+if "test -n '$SSH_CONNECTION'" "bind-key C-s send-prefix"
+set-option -g history-limit 4096
+set-option -g default-shell /bin/zsh
+set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+set -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set-window-option -g utf8 on # 日本語環境なら今のところ必須。
+set-window-option -g mode-keys vi # コピーモードのキーマップ。標準はemacs
+# set-window-option -g automatic-rename off # ウィンドウ名が自動的に更新されないように
+## Mac の tmux でクリップボードをつかう
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+bind-key C-b run "tmux save-buffer - | ~/bin/reattach-to-user-namespace pbcopy"
+bind-key C-v run "~/bin/reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+
+## tmux-prompt# {{{
+# tmux-powerline
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-utf8 on
+# set-option -g status-justify "centre"
+set-option -g status-left-length 80
+set-option -g status-right-length 120
+set-option -g status-left "#(~/dotfiles/tmux-powerline/status-left.sh)#[bg=red]#[fg=black]⮀#[bg=red]#[fg=white] mem #(used-mem)%% #[bg=black]#[fg=red]⮀"
+set-option -g status-right "#(~/dotfiles/tmux-powerline/status-right.sh)"
+
+# 文字色と背景色
+set -g status-fg white
+set -g status-bg black
+
+# 256色ターミナル
+set-option -g default-terminal "screen-256color"
+# }}}
+
+# P-rで再起動
+bind r source-file ~/.tmux.conf; display-message "Reload Config!!"
+

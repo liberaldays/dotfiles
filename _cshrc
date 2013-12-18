@@ -1,0 +1,67 @@
+set path=($HOME/bin /bin /opt/local/bin /usr/bin /usr/local/bin /usr/X11R6/bin)
+set hostnames = (cupido cardea camena cacus carna caelus caca mania misericordia mors matuta mens muses)
+set osType = `uname -s`
+#setenv LANG ja_JP.eucJP
+setenv LANG ja_JP.UTF-8
+setenv EDITOR vi
+setenv BLOCKSIZE K
+setenv PAGER less
+#alias su su -l
+alias ll ls -l
+alias la ls -a
+alias ls ls -G
+alias sl ls -flawnG
+alias tmux="tmux -2"
+alias ta="tmux attach"
+# setenv CVSROOT $HOME/CVS_DB
+# setenv CVSEDITOR emacs
+# setenv TEXINPUTS .:$HOME/.tex/inputs//:
+
+
+if("$osType" == "Darwin") then
+alias emacs open -a emacs
+#alias emacs /Applications/Emacs.app/Contents/MacOS/Emacs
+alias firefox open -a firefox
+
+else
+alias emacs env LANG=ja_JP.eucJP emacs
+alias firefox env LANG=ja_JP.eucJP firefox
+
+endif
+
+complete cd 'p/*/d/'
+complete ssh 'p/*/$hostnames/'
+complete screen 'n/-r/`screenpid`/'
+complete g++ 'p/*/f:*.cpp/'
+complete ping 'p/1/$hostnames/'
+complete ruptime 'p/1/$hostnames/'
+complete man 'p/*/c/'
+complete platex 'p/*/f:*.tex/'
+complete xdvi 'p/*/f:*.dvi/'
+complete tgif 'p/*/f:*.obj/'
+complete acroread 'p/*/f:*.pdf/'
+
+
+if( $?prompt ) then
+    set prompt="%n@%m[%c] % "
+    set filec
+    set recexact
+    set autocorrect
+    set rmstar
+    set fignore = (.o \~)
+    set autolist = ambiguous
+    set symlinks = expand
+    set history=1000
+    set savehist=1000
+    set mail=(/var/mail/$USER)
+    if ( "$USER" != root ) umask 022
+endif
+
+if($TERM == 'kterm') then
+      setenv TERM kterm-color
+else if ($TERM == 'xterm') then
+      setenv TERM xterm-color
+else if ($TERM == 'xterm-new') then
+      setenv TERM xterm-color
+endif
+
