@@ -1,0 +1,11 @@
+
+_vim/.bundle/
+_vim/.netrwhist
+_vim/.DS_Store
+_vim/bundle/
+_vim/old_bundle/
+_vim/old_neobundle/
+.gitold
+*~
+*.swp
+*.swo
