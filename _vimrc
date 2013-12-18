@@ -339,11 +339,11 @@ endfunction
 let g:quickrun_config = {
             \ 'tex' : {
             \   'command' : 'latexmk',
+            \   'cmdopt' : '-c',
             \   'outputter' : 'error',
             \   'src' : 'main.tex',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c %o'],
-            \   'cmdopt' : '-c'
+            \   'exec': ['%c %o']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
