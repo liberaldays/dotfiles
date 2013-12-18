@@ -340,8 +340,10 @@ let g:quickrun_config = {
             \ 'tex' : {
             \   'command' : 'latexmk',
             \   'outputter' : 'error',
+            \   'src' : 'main.tex',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['-c %c']
+            \   'exec': ['%c %o'],
+            \   'cmdopt' : '-c'
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
