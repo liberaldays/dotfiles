@@ -344,7 +344,7 @@ let g:quickrun_config = {
             \   'cmdopt' : '-c',
             \   'outputter' : 'error',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c']
+            \   'exec': ['%c; %c %o']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
