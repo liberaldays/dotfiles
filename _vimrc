@@ -18,6 +18,8 @@ set noerrorbells
 set laststatus=2
 set history=50
 set foldmethod=marker
+set noswapfile
+set nobackup
 "set omnifunc=1
 set wildmode=list,full
 syntax on
@@ -341,9 +343,8 @@ let g:quickrun_config = {
             \   'command' : 'latexmk',
             \   'cmdopt' : '-c',
             \   'outputter' : 'error',
-            \   'src' : 'main.tex',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c %o']
+            \   'exec': ['%c']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
@@ -594,7 +595,7 @@ let g:Tex_FormatDependency_pdf = 'dvi,pdf'
 let g:Tex_BibtexFlavor = '/opt/local/bin/pbibtex'
 let g:Tex_MakeIndexFlavor = '/opt/local/bin/mendex $*.idx'
 let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
 let g:Tex_ViewRule_ps = '/usr/bin/open'
 let g:Tex_ViewRule_dvi = '/usr/bin/open'
 "}}}
