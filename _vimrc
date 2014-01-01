@@ -344,7 +344,7 @@ let g:quickrun_config = {
             \   'cmdopt' : '-c',
             \   'outputter' : 'error',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c; %c %o']
+            \   'exec': ['%c']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
@@ -591,7 +591,7 @@ let g:tex_flavor='latex'
 let g:Tex_CompileRule_dvi = '/opt/local/bin/platex --interaction=nonstopmode $*'
 let g:Tex_CompileRule_pdf = '/opt/local/bin/dvipdfmx $*.dvi'
 let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
 let g:Tex_BibtexFlavor = '/opt/local/bin/pbibtex'
 let g:Tex_MakeIndexFlavor = '/opt/local/bin/mendex $*.idx'
 let g:Tex_UseEditorSettingInDVIViewer = 1
