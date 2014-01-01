@@ -64,16 +64,8 @@ let g:email = 'admin@haccat.com'
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
