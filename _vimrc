@@ -159,6 +159,8 @@ inoremap <C-l> <Right>
 
 noremap ; :
 noremap : ;
+noremap j gj
+noremap k gk
 inoremap <C-f> <ESC>
 cnoremap <C-f> <ESC>
 lnoremap <C-f> <ESC>
