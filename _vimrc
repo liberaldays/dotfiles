@@ -566,7 +566,7 @@ endfunction"}}}
 " foldCC Setings"{{{
 
 set foldtext=FoldCCtext()
-set foldcolumn=4
+set foldcolumn=5
 set fillchars=vert:\|
 highlight Folded gui=bold term=standout ctermbg=Black ctermfg=DarkCyan guibg=#555555 guifg=DarkCyan
 highlight FoldColumn gui=bold term=standout ctermbg=Black ctermfg=DarkBlue guibg=Black guifg=DarkBlue"}}}
