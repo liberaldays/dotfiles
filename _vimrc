@@ -231,6 +231,7 @@ endif
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'osyo-manga/unite-fold'
  NeoBundle 'tsukkee/unite-help'
+ NeoBundle 'yomi322/unite-tweetvim' " unite source for tweetvim
  NeoBundle 'Shougo/vimshell'
  NeoBundleLazy "Shougo/vimfiler", {
        \ "depends": ["Shougo/unite.vim"],
