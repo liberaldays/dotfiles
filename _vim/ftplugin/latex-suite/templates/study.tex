@@ -1,54 +1,51 @@
-\documentclass[a4j]{jarticle}
-% \usepackage{fancy}
-\usepackage[dvipdfm]{graphicx}
-% \usepackage[dviout]{graphicx}
-% \usepackage[dvips]{graphicx}
+
+\documentclass[a4paper,11pt,oneside,openany]{jreport}
+%\usepackage{fancyhdr}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx,%
+  bookmarks=true,%
+  bookmarksnumbered=true,%
+  colorlinks=true,%
+  linkcolor=blue,%
+  setpagesize=false]{hyperref}
+\usepackage{pxjahyper}
 \usepackage{ascmac}
-  % \usepackage{fancybox}
-  % \usepackage{amsmath}
-  % \usepackage{amsfonts}
-\usepackage{url}
-\usepackage[top=30truemm,bottom=30truemm,left=30truemm,right=30truemm]{geometry}
+\usepackage{fancybox}
+\usepackage{amsmath,amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%\usepackage[top=30truemm,bottom=30truemm,left=30truemm,right=30truemm]{geometry}
 
-\title{グラフ構造中での資源流動問題\\-correlation clusteringの実問題的要請の改善について-}
-\author{千葉智暁}
-     % \date{2013年5月30日}
+\graphicspath{{./graphics/}}
+\newcommand{\Alref}[1]{Algorithm~\ref{#1}}
+\newcommand{\Equref}[1]{式~(\ref{#1})}
+\newcommand{\Figref}[1]{図~\ref{#1}}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mr}{\mathrm}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
-\makeatletter
-\renewcommand{\theequation}{\thesection.\arabic{equation}}
-\@addtoreset{equation}{section}
-\makeatother
+\bibliographystyle{junsrt}
+\renewcommand{\bibname}{参考文献}
 
-\makeatletter
-\@addtoreset{figure}{section}
-\renewcommand{\thefigure}{\thesection.\arabic{figure}}
-\makeatother
-
-\makeatletter
-\@addtoreset{table}{section}
-\renewcommand{\thetable}{\thesection.\arabic{table}}
-\makeatother
-
+\title{<+title+>}
+\author[Tomoaki Chiba]{千葉 智暁}
+\date{\today}
 
 \begin{document}
 
 \maketitle
 
-\section{}
+\tableofcontents
+% \listoftables
+% \listoffigures
 
-\subsection{}
+\include{<++>}
 
+\bibliography{~/Dropbox/BibTeX/library.bib}
 
-
-
-
-
-
-\begin{thebibliography}{9}
-    \bibitem{1}
-
-  \end{thebibliography}
+\include{appendix}
 
 \end{document}
-
-

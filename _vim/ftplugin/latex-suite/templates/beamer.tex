@@ -1,0 +1,348 @@
+\documentclass[9pt, dvipdfmx]{beamer}
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage{ascmac}
+\usepackage{amsmath, amsfonts}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{algorithmic}
+\usepackage{lmodern}
+
+%%%
+%%% テーマの指定、省略時は default になる
+%%%
+\usetheme{Szeged}        % フレームの指定、省略可
+\usecolortheme{orchid,dolphin}  % 省略可
+\useoutertheme{miniframes}   % ヘッダ、フッタ、フレーム等を指定、省略可
+\usefonttheme{professionalfonts}    % 省略可
+\useinnertheme{rounded}   % タイトル、section, itemize/enumerate 環境、
+
+% \usecolortheme[cmyk={0.62,0.96,0.30,0.27}]{structure} % 京紫(改)
+% \usecolortheme[cmyk={0.60,0.90,0.20,0.10}]{structure} % 紫(改)
+% \usecolortheme[cmyk={0.46,0.64,0.02,0.02}]{structure} % 藤紫(改)
+% \definecolor{substructure}{cmyk}{1.0,0.85,0.11,0.04} % 群青(改) 
+% \definecolor{emphasize}{cmyk}{0.0,0.64,0.99,0.0} % 蜜柑茶
+\definecolor{RoyalBlue}{RGB}{65,105,225}
+\definecolor{Ultramarine}{RGB}{64,0,183}
+\definecolor{Seiran}{RGB}{42,22,130}
+\definecolor{Azure}{RGB}{49,0,178}
+\definecolor{Crimson}{RGB}{220,20,60}
+\definecolor{Lime}{RGB}{50,205,50}
+%\setbeamercolor{myColor}{fg=white,bg=Seiran}
+
+% \setbeamercolor{background canvas}{bg=white}
+% \setbeamercolor{block body alerted}{bg=normal text.bg!90!black}
+% \setbeamercolor{block body}{bg=normal text.bg!90!black}
+% \setbeamercolor{block body example}{bg=normal text.bg!90!black}
+% \setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+% \setbeamercolor{block title}{bg=blue}
+% \setbeamercolor{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+% \setbeamercolor{fine separation line}{}
+% \setbeamercolor{frametitle}{fg=brown}
+% \setbeamercolor{item projected}{fg=black}
+% \setbeamercolor{normal text}{bg=black,fg=yellow}
+% % navi bar の色 (1だとほとんどわからない．5だとわかる)
+% \setbeamercolor{palette quaternary}{fg=Seiran!9!black,bg=Seiran!80!white}
+% % footer の色
+% \setbeamercolor{palette tertiary}{fg=Seiran!10!white,bg=Seiran!80!white}
+% \setbeamercolor{palette secondary}{fg=Seiran!20!white,bg=Seiran!80!white}
+% \setbeamercolor{palette primary}{fg=Seiran!10!white,bg=Seiran!30!white}
+% \setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
+% \setbeamercolor{palette sidebar quaternary}{use=structure,fg=structure.fg}
+% \setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+% \setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+% \setbeamercolor{section in sidebar}{fg=brown}
+% \setbeamercolor{section in sidebar shaded}{fg= grey}
+% \setbeamercolor{separation line}{}
+% \setbeamercolor{sidebar}{bg=red}
+% \setbeamercolor{sidebar}{parent=palette primary}
+% \setbeamercolor{structure}{fg=Seiran!80!white}
+\setbeamercolor{alerted text}{fg=Crimson}
+\setbeamercolor{example text}{fg=Lime}
+% \setbeamercolor{subsection in sidebar}{fg=brown}
+% \setbeamercolor{subsection in sidebar shaded}{fg= grey}
+% \setbeamercolor{title}{fg=brown}
+% \setbeamercolor{titlelike}{fg=brown}
+% \documentstyle[11pt]{beamer}           % theorem 環境、図, 参考文献などのスタイルを指定、
+   % 省略可
+
+% \logo{背景画像の取り込み}                  % 省略可
+\setbeamertemplate{navigation symbols}   % ナビゲーションバーを表示しません
+
+%%%
+%%%  日本語フォントをゴシックに、数式フォントを太字に変更する
+%%%
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+%   \mathversion{bold}
+\setbeamercovered{transparent=30}
+%\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=gray!30]
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\graphicspath{{./graphics/}}
+\newcommand{\Alref}[1]{Algorithm~\ref{#1}}
+\newcommand{\Equref}[1]{式~(\ref{#1})}
+\newcommand{\Figref}[1]{図~\ref{#1}}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mr}{\mathrm}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%%%
+%%% 著者など
+%%%
+\title[<++>]{\huge <+Title+>}   % Short title は省略可。ヘッダ、フッタの表示で利用
+\subtitle{<+SubTitle+>}                 % 省略可
+\author[haconeco]{千葉 智暁}
+\institute[千葉 智暁]{早稲田大学 先進理工学部 村田研 <+B4+>}
+\date{<+\today+>}
+
+\setbeamertemplate{footline}[frame number]
+\begin{document}
+
+%%% 題目、著者など cover page
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{<+Introduction+>}        % section 名は PDF に変換したとき「しおり」にも表示される
+\subsection{<+概要+>}   % subsection 名も PDF に変換したとき「しおり」に表示される
+
+% 2 枚目のスライド
+\begin{frame}
+  \frametitle{概要}
+  \begin{block} {背景}
+    \begin{itemize}
+      \item 
+      \item 
+      \item 
+    \end{itemize}
+  \end{block}
+  \begin{block} {機械学習業界}
+    \begin{itemize}
+      \item 現実の応用ではヘッセ行列は密になりがち$\rightarrow$内点法の適用が困難
+      \item モデルの変更に対して柔軟に実装を変更できる
+      \item 目的関数の形状に応じて実装を変えることも辞さない
+      \item 並列化できるとなお良い
+    \end{itemize}
+  \end{block}
+  $\rightarrow$ 古い手法(60-70年代)が論文で提案される手法に対して使用される
+  \begin{enumerate}
+    \item<2> \alert{(Accelerated) Proximal Gradient Methods}
+    \item<2> Dual Decomposition (Dual Augmented Lagrangian)
+    \item<2> Alternating Direction Method of Multipliers (ADMM)
+  \end{enumerate}
+\end{frame}
+
+\subsection{目的関数の種類}
+
+% 3 枚目のスライド
+\begin{frame}
+  \frametitle{背景：これらの手法が注目される背景}
+  \begin{columns}
+    \begin{column}[t]{.7\textwidth}
+      \begin{block} {スパース推定}
+        \begin{itemize}
+          \item 高次元データ（サンプル数＜次元）
+            \begin{itemize}
+              \item バイオインフォマティクス（発現，SNP解析，etc）
+              \item テキストマイニング（系列，係り受け解析）
+              \item イメージング（MRI）$\leftarrow$ 圧縮センシング
+              \item ソーシャルネットワーク (人口動勢，興味関心，etc)
+            \end{itemize}
+          \item 協調フィルタリング $\rightarrow$ 低ランク構造
+          \item グラフィカルモデル推定 $\rightarrow$ グラフ構造
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{.3\textwidth}
+      \pgfputat{\pgfxy(-0.2,0.3)}{\pgfbox[left,top] { \includegraphics[width=3.8cm]{../Seminoroptim1/Dna-SNP.pdf} }}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% 4 枚目のスライド
+\begin{frame}
+  \frametitle{SNP(一塩基多型)解析}
+  \structure{目的：ゲノムの個人差$x_i$と病気になるかならないか$y_i$の関係を知りたい}\\
+  $x_i$: 入力(SNP), $y_i=1$: 病気, $y_i=-1$: 健康
+  \begin{block} {変数選択付き二値分類}
+    ロジスティック回帰：2値分類規則の学習法($y_i \in \{-1, +1\}$)
+    \begin{equation*}
+      \widehat{\bf w} = \arg\min_{{\bf w} \in \mathbb{R}^n} \structure{\sum_{i=1}^m \log(1+\exp(-y_i \cdot {\bf w}^{\rm T} {\bf x}_i))} + \alert{\lambda ||{\bf w}||_{L1}}
+      \label{eq: logistic regression}
+    \end{equation*}
+    ロジスティック損失関数：
+    \begin{align*}
+      \log(1+\exp(-yz)) &= -\log P(Y=y | z) \\
+      &{\rm where}\ P(Y=+1 | z) = \sigma(z) = \frac{e^z}{1+e^z}.
+      \label{eq: logistic loss}
+    \end{align*}
+  \end{block}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      例えば：
+      \begin{itemize}
+        \item SNPの数：n=500,000\\
+        \item 被験者の数：m=5,000
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \pgfputat{\pgfxy(-1,0.7)}{\pgfbox[left,top] { \includegraphics[width=5.7cm]{../Seminoroptim1/logis.pdf} }}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+% 5 枚目のスライド
+
+\begin{frame}
+  \frametitle{単純スパース推定問題と構造付きスパース推定問題}
+  \begin{block} {スパース推定問題の目的関数}
+    \begin{itemize}
+      \item 単純スパース推定問題\\[-3mm]
+        \begin{equation*}
+          \widehat{\bf w} = \arg\min_{\bf w} \structure{L({\bf w})} + \alert{\lambda ||{\bf w}||_{L1}}
+        \end{equation*}\\[-3mm]
+        \begin{itemize}
+          \item ネットワーク推定
+          \item SNP解析
+          \item 協調フィルタリング
+        \end{itemize}
+      \item 構造付きスパース推定問題\\[-3mm]
+        \begin{equation*}
+          \widehat{\bf w} = \arg\min_{\bf w} \structure{L({\bf w})} + \alert{\lambda||{\bf \Phi w}||_{L1}}
+        \end{equation*}\\[-3mm]
+        \begin{itemize}
+          \item 圧縮センシング (Total Variation 正則化導入時)
+          \item テンソルのTucker分解
+        \end{itemize}
+    \end{itemize}
+  \end{block}
+  \begin{itemize}
+    \item \structure{単純スパース推定問題のための最適化手法}
+      \begin{itemize}
+        \item 近接勾配法 (Proximal Gradient Method)
+        \item 双対拡張ラグランジュ法 (DAL)
+      \end{itemize}
+    \item \structure{構造付きスパース推定問題のための最適化手法}
+      \begin{itemize}
+        \item Alternating Direction Method of Multipliers (ADMM)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+  % ---------------------------------------------------------------------------------------------------
+\section{近接勾配法}
+\subsection{定式化と解法}
+
+% 9 枚目のスライド
+\begin{frame}
+  \frametitle{近接勾配法 (Proximal Gradient Method)}
+  \begin{block}{最小化問題}
+    \begin{equation*}
+      \arg\min_{\bf w} \structure{L({\bf w})} + \alert{\lambda ||{\bf w}||_1}
+    \end{equation*}
+    正則化項がsmoothでないため，微分不可能
+  \end{block}
+  \begin{block}{線形化・最小化}
+    \begin{align*}
+      \ \\[-10mm]
+      &\arg\min_{\bf w} \structure{L({\bf w})}\ \mbox{を勾配法で解くとき，}\\[-2mm]
+      {\bf w}_{t+1} &= {\bf w}_t - \eta_t \nabla \structure{L({\bf w}_t)}\\
+      &\simeq \arg\min_{\bf w}\left( ({\bf w} - {\bf w}_t)^{\rm T}\nabla \structure{L({\bf w}_t)} +
+      \frac{1}{2\eta_t}||{\bf w} - {\bf w}_t||^2_2 \right)(\mbox{中身が0 $\rightarrow$等式が成立})\\
+      &\arg\min_{\bf w} \structure{L({\bf w})} + \alert{\lambda ||{\bf w}||_1}\ \mbox{を解くとき，}\\[-2mm]
+      {\bf w}_{t+1} &= \arg\min_{\bf w}\left( \alert{\lambda||{\bf w}||_1} +
+      ({\bf w} - {\bf w}_t)^{\rm T}\nabla \structure{L({\bf w}_t)} +
+      \frac{1}{2\eta_t}||{\bf w} - {\bf w}_t||^2_2 \right) (\mbox{Shrink down})\\
+      &= \arg\min_{\bf w} \left( \lambda||{\bf w}||_1 + \frac{1}{2\eta_t}||{\bf w} - ({\bf w}_t - \eta_t\nabla L({\bf w}_t))||^2_2 \right)\\
+      &= {\rm prox}_{\lambda\eta_t} ({\bf w}_t - \eta \nabla L({\bf w}_t))
+    \end{align*}
+  \end{block}
+\end{frame}
+
+
+  % 10 枚目
+\begin{frame}
+  \frametitle{Proximal operator: 射影の一般化}
+  \begin{equation*}
+    {\rm prox}_g({\bf z}) = \arg\min_{\bf x} \left( g({\bf x}) + \frac{1}{2}||{\bf x} - {\bf z}||^2_2 \right)
+  \end{equation*}
+  \begin{columns}
+    \begin{column}[t]{.7\textwidth}
+      \begin{itemize}
+        \item 凸集合への射影：${\rm prox}_{\delta_C({\bf z})} = {\rm proj}_C({\bf z})$
+        \item Soft-Threshold ($g({\bf x})=\lambda||{\bf x}||_1$)
+      \end{itemize}
+      \begin{align*}
+        {\rm prox}_\lambda ({\bf z}) &= \arg\min_{\bf x} \left( \lambda||{\bf x}||_1 - \frac{1}{2}||{\bf x} - {\bf z}||^2 \right)\\
+        &= \begin{cases}
+          z_j + \lambda & (z_j < - \lambda)\\
+          0 & (-\lambda \leq z_j \leq \lambda)\\
+          z_j - \lambda & (z_j > \lambda)
+        \end{cases}
+      \end{align*}
+    \end{column}
+    \begin{column}[t]{.3\textwidth}
+      \pgfputat{\pgfxy(-1,0)}{\pgfbox[left,top] { \includegraphics[width=4cm]{../Seminoroptim1/prox.pdf} } }
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item 何らかの意味で\alert{分離可能}な関数$g(x)$は${\rm prox}$が簡単に計算できる
+    \item not smoothで微分不可能でも，解析的に計算できる
+  \end{itemize}
+
+\end{frame}
+
+  % 11 枚目
+
+\begin{frame}
+  \frametitle{近接勾配法}
+  \begin{block}{近接勾配法}
+    \begin{enumerate}
+      \item 適当に初期解${\bf w}_0$を決める
+      \item 停止条件が満たされるまで以下を反復：\\
+    \end{enumerate}
+    \begin{equation}
+      {\bf w}_{t+1} \leftarrow \alert{{\rm prox}_{\eta_t\lambda}}(\structure{{\bf w}_t - \eta_t\nabla L({\bf w}_t)})
+    \end{equation}
+    proxは勾配の縮小，prox演算子に入れるのは勾配法の勾配ステップ
+  \end{block}
+  \begin{columns}
+    \begin{column}[t]{.6\textwidth}
+      \begin{itemize}
+        \item 利点：実装が簡単（解析的計算を簡易化）
+        \item 損失項のヘシアンが密でない場合遅い→ 内点法を使用する
+        \item 別名：Forward-Backward splitting, Iterative Shrinkage/Thresholding
+      \end{itemize}
+    \end{column}
+    \begin{column}[t]{.4\textwidth}
+      \pgfputat{\pgfxy(0,0.4)}{\pgfbox[left,top] { \includegraphics[width=4cm]{../Seminoroptim1/grad.png} } }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{推定過程}
+  % 12 枚目
+\begin{frame}
+  \frametitle{精度行列${\bf \Omega}^*$を尤度最大化により求める}
+  尤度最大化により精度行列を求める流れはgraphical Lassoでも行う処理．\\
+  graphical Lassoなど，SICSの枠組みでの解法を模倣しつつ独自の罰則項を付加して負の対数尤度最小化の問題にする\\
+
+  \begin{block} {エッジ毎のgroup Lassoを罰則項とする対数尤度最大化}
+    \begin{align*}
+      {\bf \widehat{\Omega}} &= \arg \max_{\bf \Omega} \left\{ \log \left(\alert{P({\bf \Omega})} \prod^{n}_{n=1}P_G({\bf x}^{(n)}|{\bf \Omega})\right) \right\}\\
+      {\bf \widehat{\Omega}} &=\arg\min_{{\bf \Omega} \succ {\bf 0}}\ {\color{Lime} {\rm tr}{\bf S \Omega}} - \structure{\log|{\bf \Omega}|} + \lambda \alert{\sum_{a,b}||{\bf \Omega}_{ab}||_F}
+    \end{align*}
+    \begin{itemize}
+      \item 観測モデルは正規分布\\
+        \begin{equation*}
+          {\bf x} \sim P_G({\bf x}|{\bf \Omega}^{-1}) = {\cal N}({\bf x}|{\bf 0}, {\bf \Omega}^{-1}) = \sqrt{\frac{\structure{|{\bf \Omega}|}}{(2\pi)^{p}}}\exp\left( {\color{Lime} -{\bf x}^{\rm T}{\bf \Omega}{\bf x}} / 2 \right)
+        \end{equation*}
+      \item $L_2$の罰則化項により，group Lassoと同様の効果．エッジごとにくくられているブロック部分を$0$に近づける
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\end{document}
