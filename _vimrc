@@ -231,8 +231,13 @@ endif
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'osyo-manga/unite-fold'
  NeoBundle 'tsukkee/unite-help'
- NeoBundle 'yomi322/unite-tweetvim' " unite source for tweetvim
- NeoBundle 'Shougo/vimshell'
+ NeoBundle 'basyura/TweetVim' " twitter client for vim
+ NeoBundleLazy 'mattn/webapi-vim'
+ NeoBundleLazy 'basyura/twibill.vim'
+ NeoBundleLazy 'basyura/bitly.vim'
+ NeoBundleLazy 'osyo-manga/TweetVim-powerline-theme'
+ NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
+ NeoBundleLazy 'Shougo/vimshell'
  NeoBundleLazy "Shougo/vimfiler", {
        \ "depends": ["Shougo/unite.vim"],
        \ "autoload": {
@@ -241,8 +246,8 @@ endif
        \   "explorer": 1,
        \ }}
  NeoBundle 'sjl/gundo.vim'
- NeoBundle 'Rip-Rip/clang_complete'
- NeoBundle 'ujihisa/unite-colorscheme'
+ NeoBundleLazy 'Rip-Rip/clang_complete'
+ NeoBundleLazy 'ujihisa/unite-colorscheme'
 
  NeoBundle 'Shougo/vimproc', { 'build' : {
        \  'cygwin' : 'make -f make_cygwin.mak',
