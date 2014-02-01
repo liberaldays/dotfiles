@@ -223,7 +223,7 @@ else
     NeoBundleFetch 'Shougo/neocomplete.vim'
     NeoBundle 'Shougo/neocomplcache.vim'
 endif
- NeoBundle 'Shougo/neosnippet'
+ NeoBundleLazy 'Shougo/neosnippet'
  " Unite 周り
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'zhaocai/unite-scriptnames'
@@ -247,7 +247,7 @@ endif
        \ }}
  NeoBundle 'sjl/gundo.vim'
  NeoBundleLazy 'Rip-Rip/clang_complete'
- NeoBundleLazy 'ujihisa/unite-colorscheme'
+ NeoBundle 'ujihisa/unite-colorscheme'
 
  NeoBundle 'Shougo/vimproc', { 'build' : {
        \  'cygwin' : 'make -f make_cygwin.mak',
@@ -263,11 +263,11 @@ endif
  " Python 周り
  NeoBundle 'mitechie/pyflakes-pathogen'
 "  NeoBundle 'vim-scripts/pythoncomplete'
- NeoBundle 'lambdalisue/vim-django-support'
+ NeoBundleLazy 'lambdalisue/vim-django-support'
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
  NeoBundle 'sontek/rope-vim'
- NeoBundleLazy "davidhalter/jedi-vim", {
+ NeoBundle "davidhalter/jedi-vim", {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ },
