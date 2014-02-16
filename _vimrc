@@ -3,13 +3,12 @@ set encoding=utf-8
 set t_Co=256
 set tags=tags
 let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
-set mouse=a
 set modeline
 set number
 set numberwidth=5
 set ruler
-set tabstop=2
 set expandtab
+set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set showtabline=2
@@ -21,13 +20,17 @@ set foldmethod=marker
 set noswapfile
 set nobackup
 "set omnifunc=1
-set wildmode=list,full
+set wildmenu
+set wildmode=list,longest:full
 syntax on
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 12
 set fileencodings=utf-8,euc-jp,iso-2022-jp,sjis
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+autocmd InsertLeave * set nopaste
+" 検索を very magic で行う
+nnoremap /  /\v
 " set cursorline
 " highlight cursorline ctermbg=Blue
 " highlight cursorline ctermfg=White
@@ -64,8 +67,9 @@ let g:email = 'admin@haccat.com'
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set showcmd  " display incomplete commands
+set incsearch " do incremental searching
+
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -109,7 +113,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -146,16 +150,15 @@ autocmd MyAutoCmd BufWritePre * call s:mkdir(expand('<afile>:p:h'), v:cmdbang)
 "}}}
 
 " KEY BIND "{{{
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-d> <Del>
-inoremap <C-w> <BS>
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+inoremap <C-D> <Del>
+inoremap <C-W> <BS>
 
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-" inoremap <tab> <tab>
+inoremap <C-H> <Left>
+inoremap <C-J> <Down>
+inoremap <C-K> <Up>
+inoremap <C-L> <Right>
 
 noremap ; :
 noremap : ;
@@ -280,7 +283,6 @@ endif
  NeoBundle 'nvie/vim-flake8'
  NeoBundle 'hdima/python-syntax'
  NeoBundle 'nathanaelkane/vim-indent-guides'
-
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
  " NeoBundle 'jcfaria/Vim-R-plugin'
@@ -288,7 +290,10 @@ endif
  NeoBundle 'itchyny/lightline.vim'
  NeoBundle 'taglist.vim'
  NeoBundle 'sophacles/vim-processing'
- NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+ NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex', {
+       \ "autoload": {
+       \   "filetypes": ["tex"],
+       \ }}
  NeoBundle 'vim-scripts/R-syntax-highlighting'
  NeoBundle 'LeafCage/foldCC'
  NeoBundle 'motemen/git-vim'
@@ -307,6 +312,7 @@ endif
  NeoBundle 'xolox/vim-session', {
        \ 'depends' : 'xolox/vim-misc',
        \ }
+ NeoBundle 'deton/jasegment.vim'
  filetype on
  filetype plugin indent on
  NeoBundleCheck"}}}
@@ -407,7 +413,7 @@ if s:meet_neocomplete_requirements()
 
   " Plugin key-mappings.
   inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+  " inoremap <expr><C-l>     neocomplete#complete_common_string()
 
   " Recommended key-mappings.
   " <CR>: close popup and save indent.
@@ -418,7 +424,7 @@ if s:meet_neocomplete_requirements()
     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
   endfunction
   " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   " <C-h>, <BS>: close popup and delete backword char.
   inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -428,18 +434,18 @@ if s:meet_neocomplete_requirements()
   "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
   " For cursor moving in insert mode(Not recommended)
-  "inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-  "inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-  "inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-  "inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+  " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+  " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+  " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+  " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+
   " Or set this.
   "let g:neocomplete#enable_cursor_hold_i = 1
   " Or set this.
   "let g:neocomplete#enable_insert_char_pre = 1
 
   " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
-
+  " let g:neocomplete#enable_auto_select = 1
   " Shell like behavior(not recommended).
   "set completeopt+=longest
   "let g:neocomplete#enable_auto_select = 1
@@ -467,8 +473,8 @@ if s:meet_neocomplete_requirements()
 endif
 " <C-i> にマッピング. スニペット補完
 " Plugin key-mappings.
-imap <C-i> <Plug>(neosnippet_expand_or_jump)
-smap <C-i> <Plug>(neosnippet_expand_or_jump)
+" imap <C-i> <Plug>(neosnippet_expand_or_jump)
+" smap <C-i> <Plug>(neosnippet_expand_or_jump)
 "
 "" SuperTab like snippets behavior.
 "imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -478,23 +484,6 @@ smap <C-i> <Plug>(neosnippet_expand_or_jump)
 "if has('conceal')
 "  set conceallevel=2 concealcursor=i
 "endif
-"NEOCOMPLCASHE-END
-" Setting for clang_complete
-" " FIXME : Should add more settings
-" if !exists('g:neocomplcache_force_omni_patterns')
-"   let g:neocomplcache_force_omni_patterns = {
-" endif
-" let g:neocomplcache_force_overwrite_completefunc = 1
-" let g:neocomplcache_force_omni_patterns.c =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)'
-" let g:neocomplcache_force_omni_patterns.cpp =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-" let g:neocomplcache_force_omni_patterns.objc =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)'
-" let g:neocomplcache_force_omni_patterns.objcpp =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-" let g:clang_complete_auto = 0
-" let g:clang_auto_select = 0}
 "}}}
 
 call togglebg#map("")
@@ -581,9 +570,9 @@ highlight FoldColumn gui=bold term=standout ctermbg=Black ctermfg=DarkBlue guibg
 
 " TODO Setting "{{{
 noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.r **/*.py<CR>:cw<CR>
-syn match   Comment	"#.*$" contains=Todo,@Spell
-syn keyword Todo		FIXME NOTE NOTES TODO XXX COMBAK BUG DEBUG HACK contained"}}}
-"
+syn match   Comment "#.*$" contains=Todo,@Spell
+syn keyword Todo FIXME NOTE NOTES TODO XXX COMBAK BUG DEBUG HACK contained"}}}
+
 " " vim-latex"{{{
 ""
 set grepprg=grep\ -nH\ $*
