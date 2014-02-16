@@ -240,7 +240,7 @@ endif
  NeoBundleLazy 'basyura/bitly.vim'
  NeoBundleLazy 'osyo-manga/TweetVim-powerline-theme'
  NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
- NeoBundleLazy 'Shougo/vimshell'
+ NeoBundle 'Shougo/vimshell'
  NeoBundleLazy "Shougo/vimfiler", {
        \ "depends": ["Shougo/unite.vim"],
        \ "autoload": {
