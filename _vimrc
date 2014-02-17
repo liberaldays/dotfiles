@@ -19,7 +19,6 @@ set history=50
 set foldmethod=marker
 set noswapfile
 set nobackup
-"set omnifunc=1
 set wildmenu
 set wildmode=list,longest:full
 syntax on
@@ -341,6 +340,14 @@ function! s:hooks.on_source(bundle)
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_enable_auto_cd = 1
 endfunction
+" Edit file by tabedit.
+let g:vimfiler_edit_action = 'tabopen'
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
 "}}}
 
 " quickrun.vim{{{
@@ -572,6 +579,16 @@ highlight FoldColumn gui=bold term=standout ctermbg=Black ctermfg=DarkBlue guibg
 noremap <Leader>t :noautocmd vimgrep /TODO/j **/*.r **/*.py<CR>:cw<CR>
 syn match   Comment "#.*$" contains=Todo,@Spell
 syn keyword Todo FIXME NOTE NOTES TODO XXX COMBAK BUG DEBUG HACK contained"}}}
+
+" taglist"{{{
+" let Tlist_Use_Right_Window = 1
+" let Tlist_Display_Prototype = 1
+let Tlist_Display_Tag_Scope = 1
+let Tlist_Exit_OnlyWindow = 1
+let tlist_tex_settings = 'latex;s:sections;l:labels;r:ref;g:graphic+listing'
+let tlist_r_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
+set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
+set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)"}}}
 
 " " vim-latex"{{{
 ""
