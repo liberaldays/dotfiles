@@ -697,7 +697,9 @@ unlet s:local_session_directory
 
 " vimux settings"{{{
 " Run bpython
-noremap <Leader>vb :call VimuxRunCommand("bpython")<CR>
+noremap <Leader>vb :call VimuxRunCommand("bpython-2.7")<CR>
+" Run the current file
+map <Leader>rb :call VimuxRunCommand(bufname("%"))<CR>
 " Prompt for a command to run
 noremap <Leader>vp :VimuxPromptCommand<CR>
 " Run last command executed by VimuxRunCommand
