@@ -278,6 +278,7 @@ endif
        \   "unix": "pip install jedi",
        \ }}
  ", { 'rev' : '211cbf1fb7'}
+ NeoBundle 'benmills/vimux'
  NeoBundle 'ivanov/vim-ipython'
  NeoBundle 'nvie/vim-flake8'
  NeoBundle 'hdima/python-syntax'
@@ -326,9 +327,9 @@ endif
  nnoremap <silent> \irb :VimShellInteractive irb<CR>
 " \irr: Rを非同期で起動
  nnoremap <silent> \irr :VimShellInteractive r<CR>
- " \ss: 非同期で開いたインタプリタに現在の行を評価させる
- vmap <silent> \ss :VimShellSendString<CR>
  " 選択中に\ss: 非同期で開いたインタプリタに選択行を評価させる
+ vnoremap \ss :VimShellSendString<CR>
+ " \ss: 非同期で開いたインタプリタに現在の行を評価させる
  nnoremap <silent> \ss <S-v>:VimShellSendString<CR>"}}}
 
  " VimFiler Settings"{{{
@@ -693,3 +694,32 @@ else
 endif
 unlet s:local_session_directory
 "}}}
+
+" vimux settings"{{{
+" Run bpython
+map <Leader>vb :call VimuxRunCommand("bpython")<CR>
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>vq :VimuxCloseRunner<CR>
+" Interrupt any command running in the runner pane
+map <Leader>vx :VimuxInterruptRunner<CR>
+" Zoom the runner pane (use <bind-key> z to restore runner pane)
+map <Leader>vz :call VimuxZoomRunner()<CR>
+" Vimux as tslime replacement
+ function! VimuxSlime()
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+ endfunction
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+" orientation of the split tmux pane
+let g:VimuxOrientation = "h"
+" Vimux Prompt String
+let g:VimuxPromptString = "cmd:""}}}
