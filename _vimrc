@@ -697,31 +697,30 @@ unlet s:local_session_directory
 
 " vimux settings"{{{
 " Run bpython
-noremap <Leader>vb :call VimuxRunCommand("bpython-2.7")<CR>
+noremap <Leader>vp :call VimuxRunCommand("bpython-2.7")<CR>
 " Run the current file
-map <Leader>rb :call VimuxRunCommand(bufname("%"))<CR>
+noremap <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
 " Prompt for a command to run
-noremap <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-noremap <Leader>vl :VimuxRunLastCommand<CR>
+noremap <Leader>vc :VimuxPromptCommand<CR>
 " Inspect runner pane
 noremap <Leader>vi :VimuxInspectRunner<CR>
 " Close vim tmux runner opened by VimuxRunCommand
 noremap <Leader>vq :VimuxCloseRunner<CR>
-" Interrupt any command running in the runner pane
-noremap <Leader>vx :VimuxInterruptRunner<CR>
 " Zoom the runner pane (use <bind-key> z to restore runner pane)
 noremap <Leader>vz :call VimuxZoomRunner()<CR>
 " Vimux as tslime replacement
 function! VimuxSlime()
   call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
+"  call VimuxSendKeys("Enter")
 endfunction
 " If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+" send current line
+nmap <LocalLeader>vl <S-V><LocalLeader>vs<CR>
 " Select current paragraph and send it to tmux
-nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+nmap <LocalLeader>vb vip<LocalLeader>vs<CR>
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"
 " Vimux Prompt String
 let g:VimuxPromptString = "cmd:""}}}
