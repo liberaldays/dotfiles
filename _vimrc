@@ -169,7 +169,7 @@ lnoremap <C-f> <ESC>
 noremap <Esc><Esc> :nohlsearch<CR>
 
 " Open vimrc
-nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>
 nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
 
 noremap tL :<C-u>Tlist<CR>
@@ -248,7 +248,7 @@ endif
        \   "explorer": 1,
        \ }}
  NeoBundle 'sjl/gundo.vim'
- NeoBundleLazy 'Rip-Rip/clang_complete'
+ NeoBundle 'Rip-Rip/clang_complete'
  NeoBundle 'ujihisa/unite-colorscheme'
 
  NeoBundle 'Shougo/vimproc', { 'build' : {
@@ -405,6 +405,9 @@ if s:meet_neocomplete_requirements()
   " Set minimum syntax keyword length.
   let g:neocomplete#sources#syntax#min_keyword_length = 3
   let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplete#enable_auto_close_preview = 1
+  " disable preview pane
+  set completeopt-=preview
 
   " Define dictionary.
   let g:neocomplete#sources#dictionary#dictionaries = {
@@ -434,8 +437,8 @@ if s:meet_neocomplete_requirements()
   " <TAB>: completion.
   " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
   inoremap <expr><C-y>  neocomplete#close_popup()
   inoremap <expr><C-e>  neocomplete#cancel_popup()
   " Close popup by <Space>.
@@ -464,21 +467,74 @@ if s:meet_neocomplete_requirements()
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  " Python - jedi
+  autocmd FileType python setlocal omnifunc=jedi#completions
+  "let g:jedi#popup_select_first=0
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
-  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+
+  if !exists('g:neocomplete#sources#omni#functions')
+    let g:neocomplete#sources#omni#functions = {}
+  endif
+
+  " Python - jedi
+  let g:neocomplete#force_omni_input_patterns.python =
+        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  let g:neocomplete#sources#omni#input_patterns.php =
+        \ '[^. \t]->\h\w*\|\h\w*::'
+
+  " FOR clang_complete settings
+  " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  let g:neocomplete#force_overwrite_completefunc = 1
+  let g:neocomplete#force_omni_input_patterns.c =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  let g:neocomplete#force_omni_input_patterns.cpp =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  let g:neocomplete#force_omni_input_patterns.objc =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  let g:neocomplete#force_omni_input_patterns.objcpp =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  let g:clang_complete_auto = 0
+  let g:clang_auto_select = 0
+  "let g:clang_use_library = 1
+
+  "For External plugin's completion
+  " Go (plugin: gocode)
+  let g:neocomplete#sources#omni#functions.go =
+  \ 'gocomplete#Complete'
+  " Clojure (plugin: vim-clojure)
+  let g:neocomplete#sources#omni#functions.clojure =
+  \ 'vimclojure#OmniCompletion'
+  " SQL
+  let g:neocomplete#sources#omni#functions.sql =
+  \ 'sqlcomplete#Complete'
+  " R (plugin: vim-R-plugin)
+  let g:neocomplete#sources#omni#input_patterns.r =
+  \ '[[:alnum:].\\]\+'
+  let g:neocomplete#sources#omni#functions.r =
+  \ 'rcomplete#CompleteR'
+  " XQuery (plugin: XQuery-indentomnicomplete)
+  let g:neocomplete#sources#omni#input_patterns.xquery =
+  \ '\k\|:\|\-\|&'
+  let g:neocomplete#sources#omni#functions.xquery =
+  \ 'xquerycomplete#CompleteXQuery'
 
   " For perlomni.vim setting.
   " https://github.com/c9s/perlomni.vim
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
+
 " <C-i> にマッピング. スニペット補完
 " Plugin key-mappings.
 " imap <C-i> <Plug>(neosnippet_expand_or_jump)
