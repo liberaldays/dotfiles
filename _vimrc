@@ -155,8 +155,8 @@ inoremap <C-D> <Del>
 inoremap <C-W> <BS>
 
 inoremap <C-H> <Left>
-inoremap <C-J> <Down>
-inoremap <C-K> <Up>
+" inoremap <C-J> <Down>
+" inoremap <C-K> <Up>
 inoremap <C-L> <Right>
 
 noremap ; :
@@ -225,11 +225,9 @@ else
     NeoBundleFetch 'Shougo/neocomplete.vim'
     NeoBundle 'Shougo/neocomplcache.vim'
 endif
- NeoBundle 'Shougo/context_filetype.vim'
- NeoBundle 'Shougo/neosnippet-snippets'
  " NeoBundle 'honza/vim-snippets'
  NeoBundleLazy 'Shougo/neosnippet', {
-       \ 'depends': ["Shougo/neosnippet-snippets","Shougo/context_filetype"],
+       \ 'depends': ["Shougo/neosnippet-snippets","Shougo/context_filetype.vim"],
        \ "autoload": {
        \    "insert": 1,
        \ }}
@@ -353,6 +351,7 @@ function! s:hooks.on_source(bundle)
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_enable_auto_cd = 1
 endfunction
+unlet s:hooks
 " Edit file by tabedit.
 let g:vimfiler_edit_action = 'tabopen'
 " Like Textmate icons.
@@ -447,7 +446,7 @@ if s:meet_neocomplete_requirements()
     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
   endfunction
   " <TAB>: completion.
-  " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   " <C-h>, <BS>: close popup and delete backword char.
   inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
   inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
@@ -462,18 +461,18 @@ if s:meet_neocomplete_requirements()
   " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
   " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
 
-  " Or set this.
-  "let g:neocomplete#enable_cursor_hold_i = 1
-  " Or set this.
-  "let g:neocomplete#enable_insert_char_pre = 1
+  " " Or set this.
+  " let g:neocomplete#enable_cursor_hold_i = 1
+  " " Or set this.
+  " let g:neocomplete#enable_insert_char_pre = 1
 
-  " AutoComplPop like behavior.
+  " " AutoComplPop like behavior.
   " let g:neocomplete#enable_auto_select = 1
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+  " " Shell like behavior(not recommended).
+  " set completeopt+=longest
+  " let g:neocomplete#enable_auto_select = 1
+  " let g:neocomplete#disable_auto_complete = 1
+  " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -549,21 +548,23 @@ endif
 "}}}
 "
 " neosnippet "{{{
-" <C-i> にマッピング. スニペット補完
-let s:hooks = neobundle#get_hooks("neosnippet.vim")
-function! s:hooks.on_source(bundle)
+" <C-J> にマッピング. スニペット補完
 " Plugin key-mappings.
-  imap <C-i> <Plug>(neosnippet_expand_or_jump)
-  smap <C-i> <Plug>(neosnippet_expand_or_jump)
-  "" SuperTab like snippets behavior.
-  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  "" For snippet_complete marker.
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
-  endif
-  let g:neosnippet#snippets_directory=s:bundle_root
-endfunction
+imap <C-J> <Plug>(neosnippet_expand_or_jump)
+smap <C-J> <Plug>(neosnippet_expand_or_jump)
+xmap <C-J> <Plug>(neosnippet_expand_target)
+"" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+"" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+" let g:neosnippet#snippets_directory=s:bundle_root
 "}}}
 
 " Unite Settings"{{{
@@ -596,7 +597,7 @@ noremap <C-k><C-h> :<C-u>Unite help<CR>
 " カラースキーム
 noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
 " スニペット
-imap <C-k><C-i> i_<Plug>(neosnippet_start_unite_snippet)
+imap <C-k><C-i> <Plug>(neosnippet_start_unite_snippet)
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')

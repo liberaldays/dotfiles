@@ -26,12 +26,13 @@ setl foldlevel=99
 compiler nose
 
 " for jedi
-let g:jedi#auto_initialization = 1
+" let g:jedi#auto_initialization = 0
+" let g:jedi#auto_vim_configuration = 0
 let g:jedi#rename_command = '<leader>R'
 let g:jedi#goto_assignments_command = '<leader>G'
 let g:jedi#popup_on_dot = 1
 let g:jedi#popup_select_first = 0
-" let g:jedi#show_function_definition = 1
+let g:jedi#show_call_signatures = 1
 " autocmd FileType python let b:did_ftplugin = 1
 
 " vim-ipython command
