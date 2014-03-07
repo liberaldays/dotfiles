@@ -227,9 +227,9 @@ else
 endif
  NeoBundle 'Shougo/context_filetype.vim'
  NeoBundle 'Shougo/neosnippet-snippets'
- NeoBundle 'honza/vim-snippets'
+ " NeoBundle 'honza/vim-snippets'
  NeoBundleLazy 'Shougo/neosnippet', {
-       \ 'depends': ["Shougo/neosnippet-snippets"],
+       \ 'depends': ["Shougo/neosnippet-snippets","Shougo/context_filetype"],
        \ "autoload": {
        \    "insert": 1,
        \ }}
@@ -546,20 +546,24 @@ if s:meet_neocomplete_requirements()
   " https://github.com/c9s/perlomni.vim
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
-
+"}}}
+"
+" neosnippet "{{{
 " <C-i> にマッピング. スニペット補完
+let s:hooks = neobundle#get_hooks("neosnippet.vim")
+function! s:hooks.on_source(bundle)
 " Plugin key-mappings.
-imap <C-i> <Plug>(neosnippet_expand_or_jump)
-smap <C-i> <Plug>(neosnippet_expand_or_jump)
-"
-"" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-"
-"" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+  imap <C-i> <Plug>(neosnippet_expand_or_jump)
+  smap <C-i> <Plug>(neosnippet_expand_or_jump)
+  "" SuperTab like snippets behavior.
+  imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  "" For snippet_complete marker.
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
+  let g:neosnippet#snippets_directory=s:bundle_root
+endfunction
 "}}}
 
 " Unite Settings"{{{
@@ -591,7 +595,8 @@ noremap <C-k><C-y> :<C-u>Unite history/yank<CR>
 noremap <C-k><C-h> :<C-u>Unite help<CR>
 " カラースキーム
 noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
-
+" スニペット
+imap <C-k><C-i> i_<Plug>(neosnippet_start_unite_snippet)
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
