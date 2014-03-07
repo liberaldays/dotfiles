@@ -219,7 +219,7 @@ function! s:meet_neocomplete_requirements()
   return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
 endfunction
 if s:meet_neocomplete_requirements()
-   NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplete.vim'
     NeoBundleFetch 'Shougo/neocomplcache.vim'
 else
     NeoBundleFetch 'Shougo/neocomplete.vim'
@@ -228,6 +228,7 @@ endif
  NeoBundleLazy 'Shougo/neosnippet'
  " Unite 周り
  NeoBundle 'Shougo/unite.vim'
+ NeoBundle 'Shougo/neomru.vim'
  NeoBundle 'zhaocai/unite-scriptnames'
  NeoBundle 'h1mesuke/unite-outline'
  NeoBundle 'tsukkee/unite-tag'
@@ -269,7 +270,7 @@ endif
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
  NeoBundle 'sontek/rope-vim'
- NeoBundle "davidhalter/jedi-vim", {
+ NeoBundleLazy "davidhalter/jedi-vim", {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ },
@@ -282,7 +283,11 @@ endif
  NeoBundle 'ivanov/vim-ipython'
  NeoBundle 'nvie/vim-flake8'
  NeoBundle 'hdima/python-syntax'
- NeoBundle 'nathanaelkane/vim-indent-guides'
+ " NeoBundle 'nathanaelkane/vim-indent-guides'
+ NeoBundleLazy 'Yggdroot/indentLine', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
  " NeoBundle 'jcfaria/Vim-R-plugin'
@@ -290,7 +295,7 @@ endif
  NeoBundle 'itchyny/lightline.vim'
  NeoBundle 'taglist.vim'
  NeoBundle 'sophacles/vim-processing'
- NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex', {
+ NeoBundleLazy 'git://git.code.sf.net/p/vim-latex/vim-latex', {
        \ "autoload": {
        \   "filetypes": ["tex"],
        \ }}
@@ -385,14 +390,14 @@ nmap <Leader>r <Plug>(quickrun)
 set splitright
 "}}}
 
-" powerline - settings"{{{
-" font
-" フォントサイズ
-set guifont=Ricty_for_Powerline:h10
-" こっちは日本語フォント
-set guifontwide=Ricty:h10
-" " `fancy' テーマに切り替え
-let g:Powerline_symbols = 'fancy'"}}}
+" " powerline - settings"{{{
+" " font
+" " フォントサイズ
+" set guifont=Ricty_for_Powerline:h10
+" " こっちは日本語フォント
+" set guifontwide=Ricty:h10
+" " " `fancy' テーマに切り替え
+" let g:Powerline_symbols = 'fancy'"}}}
 
 " NEOCOMPLETE"{{{
 if s:meet_neocomplete_requirements()
@@ -600,28 +605,36 @@ function! s:unite_my_settings()
 endfunction"}}}
 
 " colorscheme Settings"{{{
-" if (&ft=='python')
-"   " Term Colors Settings (molokai)
-"   let g:molokai_original=0
-"   let g:rehash256=0
-"   colorscheme molokai
-"   set bg=dark
-"   set bg=light
-" else
-  " Term Colors Settings (solarized)
-  let g:solarized_termcolors=256
-  let g:solarized_termtrans=1
-  let g:solarized_degrade=0
-  let g:solarized_bold=1
-  let g:solarized_underline=1
-  let g:solarized_italic=1
-  let g:solarized_contrast="high"
-  let g:solarized_visibility="high"
-  set background=dark
-  colorscheme solarized
-" endif
+let g:solarized_termcolors=256 |
+let g:solarized_termtrans=1 |
+let g:solarized_degrade=0 |
+let g:solarized_bold=1 |
+let g:solarized_underline=1 |
+let g:solarized_italic=1 |
+let g:solarized_contrast="high" |
+let g:solarized_visibility="high" |
+set background=dark |
+colorscheme solarized |
+" autocmd BufWinEnter,TabEnter,FileType *
+"       \ if &ft!='python' |
+"       \  let g:solarized_termcolors=256 |
+"       \  let g:solarized_termtrans=1 |
+"       \  let g:solarized_degrade=0 |
+"       \  let g:solarized_bold=1 |
+"       \  let g:solarized_underline=1 |
+"       \  let g:solarized_italic=1 |
+"       \  let g:solarized_contrast="high" |
+"       \  let g:solarized_visibility="high" |
+"       \  set background=dark |
+"       \  colorscheme solarized |
+"       \ else |
+"       \   let g:molokai_original=0 |
+"       \   let g:rehash256=0 |
+"       \   colorscheme molokai |
+"       \   set bg=dark |
+"       \   set bg=light |
+"       \ endif
 "
-" autocmd FileType python colorscheme molokai
 "}}}
 
 " foldCC Setings"{{{

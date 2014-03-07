@@ -42,14 +42,19 @@ vnoremap <buffer><C-t><C-t> :py run_these_lines()<CR>
 " python-syntax
 let OPTION_NAME = 1
 let python_highlight_all = 1
+let b:python_version_2 = 1
 
 " Indent-Guide
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_color_change_percent = 10
-autocmd VimEnter,Colorscheme,BufEnter,BufNewFile * :hi IndentGuidesOdd ctermbg=321 guibg=darkblue
-autocmd VimEnter,Colorscheme,BufEnter,BufNewFile * :hi IndentGuidesEven ctermbg=446 guibg=darkgrey
-let g:indent_guides_guide_size = 1
-
-let g:indent_guides_enable_on_vim_startup = 1
+autocmd BufWinEnter,TabEnter,FileType python
+      \ let g:indentLine_color_term = 239 |
+      \ let g:indentLine_char = '>' |
+      \ let g:indentLine_fileType = ['python', 'python3', 'djangohtml'] |
+      \ let g:indentLine_noConcealCursor = 1 |
+" let g:indent_guides_auto_colors = 0
+" let g:indent_guides_color_change_percent = 10
+" autocmd VimEnter,Colorscheme,BufEnter,BufNewFile * :hi IndentGuidesOdd ctermbg=321 guibg=darkblue
+" autocmd VimEnter,Colorscheme,BufEnter,BufNewFile * :hi IndentGuidesEven ctermbg=446 guibg=darkgrey
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_enable_on_vim_startup = 1
 
 " colorscheme
