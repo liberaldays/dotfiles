@@ -169,7 +169,7 @@ lnoremap <C-f> <ESC>
 noremap <Esc><Esc> :nohlsearch<CR>
 
 " Open vimrc
-nnoremap <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>
+nnoremap <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>:<C-u>lcd %:p:h<CR>
 nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
 
 noremap tL :<C-u>Tlist<CR>
@@ -317,7 +317,7 @@ endif
  " Editing Text 3 Gods Arms
  NeoBundle 'tpope/vim-surround'
  NeoBundle 'vim-scripts/Align'
- NeoBundle 'vim-scripts/YankRing.vim'
+ " NeoBundle 'vim-scripts/YankRing.vim'
  NeoBundle 'aperezdc/vim-template'
  NeoBundle 'xolox/vim-session', {
        \ 'depends' : 'xolox/vim-misc',
