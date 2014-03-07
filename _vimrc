@@ -225,7 +225,14 @@ else
     NeoBundleFetch 'Shougo/neocomplete.vim'
     NeoBundle 'Shougo/neocomplcache.vim'
 endif
- NeoBundleLazy 'Shougo/neosnippet'
+ NeoBundle 'Shougo/context_filetype.vim'
+ NeoBundle 'Shougo/neosnippet-snippets'
+ NeoBundle 'honza/vim-snippets'
+ NeoBundleLazy 'Shougo/neosnippet', {
+       \ 'depends': ["Shougo/neosnippet-snippets"],
+       \ "autoload": {
+       \    "insert": 1,
+       \ }}
  " Unite 周り
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/neomru.vim'
@@ -269,7 +276,7 @@ endif
  NeoBundleLazy 'lambdalisue/vim-django-support'
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
- NeoBundle 'sontek/rope-vim'
+"  NeoBundle 'sontek/rope-vim'
  NeoBundleLazy "davidhalter/jedi-vim", {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
@@ -542,20 +549,18 @@ endif
 
 " <C-i> にマッピング. スニペット補完
 " Plugin key-mappings.
-" imap <C-i> <Plug>(neosnippet_expand_or_jump)
-" smap <C-i> <Plug>(neosnippet_expand_or_jump)
+imap <C-i> <Plug>(neosnippet_expand_or_jump)
+smap <C-i> <Plug>(neosnippet_expand_or_jump)
 "
 "" SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 "
 "" For snippet_complete marker.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=i
-"endif
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 "}}}
-
-call togglebg#map("")
 
 " Unite Settings"{{{
 " 入力モードで開始する
@@ -605,16 +610,17 @@ function! s:unite_my_settings()
 endfunction"}}}
 
 " colorscheme Settings"{{{
-let g:solarized_termcolors=256 |
-let g:solarized_termtrans=1 |
-let g:solarized_degrade=0 |
-let g:solarized_bold=1 |
-let g:solarized_underline=1 |
-let g:solarized_italic=1 |
-let g:solarized_contrast="high" |
-let g:solarized_visibility="high" |
-set background=dark |
-colorscheme solarized |
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_underline=1
+let g:solarized_italic=1
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+set background=dark
+colorscheme solarized
+call togglebg#map("")
 " autocmd BufWinEnter,TabEnter,FileType *
 "       \ if &ft!='python' |
 "       \  let g:solarized_termcolors=256 |
