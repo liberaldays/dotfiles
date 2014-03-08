@@ -239,6 +239,7 @@ endif
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'osyo-manga/unite-fold'
  NeoBundle 'tsukkee/unite-help'
+ NeoBundle 'kana/vim-vspec'
  NeoBundle 'basyura/TweetVim' " twitter client for vim
  NeoBundleLazy 'mattn/webapi-vim'
  NeoBundleLazy 'basyura/twibill.vim'
@@ -275,7 +276,7 @@ endif
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
 "  NeoBundle 'sontek/rope-vim'
- NeoBundleLazy "haconeco/jedi-vim", {
+ NeoBundleLazy "davidhalter/jedi-vim", {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ },
