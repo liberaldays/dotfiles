@@ -275,7 +275,7 @@ endif
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
 "  NeoBundle 'sontek/rope-vim'
- NeoBundleLazy "davidhalter/jedi-vim", {
+ NeoBundleLazy "haconeco/jedi-vim", {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ },
