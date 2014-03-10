@@ -169,8 +169,8 @@ lnoremap <C-f> <ESC>
 noremap <Esc><Esc> :nohlsearch<CR>
 
 " Open vimrc
-nnoremap <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>:<C-u>lcd %:p:h<CR>
-nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
+nnoremap <silent> <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>:<C-u>lcd %:p:h<CR>
+nnoremap <silent> <Space>s. :<C-u>source $MYVIMRC<CR>
 
 noremap tL :<C-u>Tlist<CR>
 noremap tn :<C-u>tabnext<CR>
@@ -257,7 +257,6 @@ endif
  NeoBundle 'sjl/gundo.vim'
  NeoBundle 'Rip-Rip/clang_complete'
  NeoBundle 'ujihisa/unite-colorscheme'
-
  NeoBundle 'Shougo/vimproc', { 'build' : {
        \  'cygwin' : 'make -f make_cygwin.mak',
        \  'mac'  : 'make -f make_mac.mak',
@@ -382,8 +381,10 @@ let g:quickrun_config = {
             \   'outputter' : 'browser',
             \   'command': 'pandoc',
             \   'exec': '%c --from=markdown --to=html %o %s %a',
-            \ }
-            \}
+            \ },
+            \ 'python' : {
+            \   'command' : 'ipython',
+            \ }}
 let g:quickrun_config['_'] = {
             \   'runner' : 'vimproc',
             \   'runner/vimproc/updatetime' : 100,
@@ -651,9 +652,8 @@ call togglebg#map("")
 "}}}
 
 " foldCC Setings"{{{
-
 set foldtext=FoldCCtext()
-set foldcolumn=5
+set foldcolumn=4
 set fillchars=vert:\|
 highlight Folded gui=bold term=standout ctermbg=Black ctermfg=DarkCyan guibg=#555555 guifg=DarkCyan
 highlight FoldColumn gui=bold term=standout ctermbg=Black ctermfg=DarkBlue guibg=Black guifg=DarkBlue"}}}
@@ -673,8 +673,7 @@ let tlist_r_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
 set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
 set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)"}}}
 
-" " vim-latex"{{{
-""
+" vim-latex"{{{
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_CompileRule_dvi = '/opt/local/bin/platex --interaction=nonstopmode $*'
