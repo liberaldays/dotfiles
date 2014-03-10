@@ -383,7 +383,7 @@ let g:quickrun_config = {
             \   'exec': '%c --from=markdown --to=html %o %s %a',
             \ },
             \ 'python' : {
-            \   'command' : 'ipython',
+            \   'command' : 'python2.7',
             \ }}
 let g:quickrun_config['_'] = {
             \   'runner' : 'vimproc',
