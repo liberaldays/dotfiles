@@ -275,6 +275,7 @@ endif
  NeoBundleLazy 'lambdalisue/vim-django-support'
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
+ NeoBundle 'alfredodeza/pytest.vim'
 "  NeoBundle 'sontek/rope-vim'
  NeoBundleLazy "davidhalter/jedi-vim", {
        \ "autoload": {
