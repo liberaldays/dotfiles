@@ -161,8 +161,10 @@ setopt correct
 #}}}
 
 # PATH設定#{{{
-export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/:/usr/local/bin:~/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/:/opt/local/lib/mysql55/bin:/usr/local/bin:~/bin:$PATH
 export MANPATH=$MANPATH:/opt/local/share/man
+export WORKON_HOME=$HOME/.virtualenvs
+source `which virtualenvwrapper.sh`
 #}}}
 
 # 色適用#{{{
