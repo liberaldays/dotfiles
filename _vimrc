@@ -27,9 +27,10 @@ set fileencodings=utf-8,euc-jp,iso-2022-jp,sjis
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
 " 検索を very magic で行う
-nnoremap /  /\v
+" nnoremap /  /\v
 " set cursorline
 " highlight cursorline ctermbg=Blue
 " highlight cursorline ctermfg=White
