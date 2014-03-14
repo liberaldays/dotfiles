@@ -137,7 +137,7 @@ endfunction
 command! -bar -bang -nargs=? -complete=file Scouter
 \        echo Scouter(empty(<q-args>) ? $MYVIMRC : expand(<q-args>), <bang>0)
 command! -bar -bang -nargs=? -complete=file GScouter
-\        echo Scouter(empty(<q-args>) ? $MYGVIMRC : expand(<q-args>), <bang>0) 
+\        echo Scouter(empty(<q-args>) ? $MYGVIMRC : expand(<q-args>), <bang>0)
 
 " :e などでファイルを開く際にフォルダが存在しない場合は自動作成
 function! s:mkdir(dir, force)
@@ -179,7 +179,7 @@ noremap tp :<C-u>tabprevious<CR>
 noremap tf :<C-u>tabfirst<CR>
 noremap tl :<C-u>tablast<CR>
 noremap tN :<C-u>tabnew<CR>
-noremap <Leader>n :VimFiler<CR>
+noremap <C-N> :VimFiler<CR>
 noremap md :<C-u>lcd %:p:h<CR>
 
 "----------------------------------------------------
@@ -721,8 +721,8 @@ endfunction
 
 function! MyFilename()
   return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() : 
-        \  &ft == 'unite' ? unite#get_status_string() : 
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
         \  &ft == 'vimshell' ? vimshell#get_status_string() :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
@@ -759,7 +759,7 @@ function! VimpressSetting()
 endfunction"}}}
 
 " vim-session"{{{
-" 現在のディレクトリ直下の .vimsessions/ を取得 
+" 現在のディレクトリ直下の .vimsessions/ を取得
 let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
 " 存在すれば
 if isdirectory(s:local_session_directory)
