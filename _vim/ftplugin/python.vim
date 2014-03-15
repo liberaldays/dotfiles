@@ -30,6 +30,7 @@ compiler nose
 " let g:jedi#auto_vim_configuration = 0
 let g:jedi#rename_command = '<leader>R'
 let g:jedi#goto_assignments_command = '<leader>G'
+let g:jedi#goto_definitions_command = '<leader>D'
 let g:jedi#popup_on_dot = 1
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 1
