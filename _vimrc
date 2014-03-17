@@ -291,7 +291,7 @@ endif
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ }}
  NeoBundle 'benmills/vimux'
- NeoBundle 'ivanov/vim-ipython'
+ " NeoBundle 'ivanov/vim-ipython'
  NeoBundle 'nvie/vim-flake8'
  NeoBundle 'hdima/python-syntax'
  " NeoBundle 'nathanaelkane/vim-indent-guides'
