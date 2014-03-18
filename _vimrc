@@ -286,6 +286,10 @@ endif
        \   "unix": "pip install jedi",
        \ }}
  ", { 'rev' : '211cbf1fb7'}
+ NeoBundleLazy 'jmcantrell/vim-virtualenv', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
  NeoBundle 'benmills/vimux'
  " NeoBundle 'ivanov/vim-ipython'
  NeoBundle 'nvie/vim-flake8'
