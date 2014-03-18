@@ -287,7 +287,7 @@ endif
        \ }}
  ", { 'rev' : '211cbf1fb7'}
  NeoBundle 'benmills/vimux'
- NeoBundle 'ivanov/vim-ipython'
+ " NeoBundle 'ivanov/vim-ipython'
  NeoBundle 'nvie/vim-flake8'
  NeoBundle 'hdima/python-syntax'
  " NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -781,7 +781,7 @@ unlet s:local_session_directory
 " vimux settings"{{{
 if &ft!='python'
   " Run bpython
-  noremap <Leader>vp :call VimuxRunCommand("bpython-2.7")<CR>
+  noremap <Leader>vp :call VimuxRunCommand("ipython")<CR>
   " Run the current file
   noremap <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
   " Prompt for a command to run
