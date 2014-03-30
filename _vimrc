@@ -787,7 +787,7 @@ if &ft!='python'
   " Run bpython
   noremap <Leader>vp :call VimuxRunCommand("ipython")<CR>
   " Run the current file
-  noremap <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
+  noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
   " Prompt for a command to run
   noremap <Leader>vc :VimuxPromptCommand<CR>
   " Inspect runner pane
