@@ -50,7 +50,7 @@ let b:python_version_2 = 1
 " Indent-Guide
 autocmd BufWinEnter,TabEnter,FileType python
       \ let g:indentLine_color_term = 239 |
-      \ let g:indentLine_char = '>' |
+      \ let g:indentLine_char = '|' |
       \ let g:indentLine_fileType = ['python', 'python3', 'djangohtml'] |
       \ let g:indentLine_noConcealCursor = 1 |
 " let g:indent_guides_auto_colors = 0
