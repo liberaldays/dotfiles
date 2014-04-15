@@ -1,5 +1,4 @@
 " First setings"{{{
-set encoding=utf-8
 set t_Co=256
 set tags=tags
 let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
@@ -24,6 +23,7 @@ set wildmode=list,longest:full
 syntax on
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 12
 set fileencodings=iso-2022-jp,sjis,euc-jp,utf-8
+set encoding=utf-8
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
