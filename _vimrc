@@ -22,7 +22,7 @@ set wildmenu
 set wildmode=list,longest:full
 syntax on
 set gfn=Bitstream\ Vera\ Sans\ Mono\ 12
-set fileencodings=iso-2022-jp,sjis,euc-jp,utf-8
+set fileencodings=utf-8,sjis,iso-2022-jp,euc-jp
 set encoding=utf-8
 set nocompatible
 set list
