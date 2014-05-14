@@ -240,13 +240,16 @@ endif
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'osyo-manga/unite-fold'
  NeoBundle 'tsukkee/unite-help'
+ NeoBundle 'choplin/unite-spotlight'
+ NeoBundle 'kannokanno/unite-todo'
+ NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
+ NeoBundle 'ujihisa/unite-colorscheme'
  NeoBundle 'kana/vim-vspec'
  NeoBundle 'basyura/TweetVim' " twitter client for vim
  NeoBundleLazy 'mattn/webapi-vim'
  NeoBundleLazy 'basyura/twibill.vim'
  NeoBundleLazy 'basyura/bitly.vim'
  NeoBundleLazy 'osyo-manga/TweetVim-powerline-theme'
- NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
  NeoBundle 'Shougo/vimshell'
  NeoBundleLazy "Shougo/vimfiler", {
        \ "depends": ["Shougo/unite.vim"],
@@ -257,7 +260,6 @@ endif
        \ }}
  NeoBundle 'sjl/gundo.vim'
  NeoBundle 'Rip-Rip/clang_complete'
- NeoBundle 'ujihisa/unite-colorscheme'
  NeoBundle 'Shougo/vimproc', { 'build' : {
        \  'cygwin' : 'make -f make_cygwin.mak',
        \  'mac'  : 'make -f make_mac.mak',
@@ -602,10 +604,23 @@ noremap <C-k>c :<C-u>Unite command<CR>
 noremap <C-k><C-y> :<C-u>Unite history/yank<CR>
 " ヘルプ参照
 noremap <C-k><C-h> :<C-u>Unite help<CR>
+" pydoc
+noremap <C-k><C-d> :<C-u>Unite ref/pydoc<CR>
 " カラースキーム
 noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
 " スニペット
 imap <C-k><C-i> <Plug>(neosnippet_start_unite_snippet)
+" todo
+noremap <C-k><C-t> :<C-u>Unite todo<CR>
+" Spotlight
+noremap <C-k><C-p> :<C-u>Unite spotlight<CR>
+" Outline
+noremap <C-k><C-o> :<C-u>Unite outline<CR>
+" unite-tag
+autocmd BufEnter *
+\   if empty(&buftype)
+\|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
+\|  endif
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')

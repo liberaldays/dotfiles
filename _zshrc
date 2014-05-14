@@ -163,9 +163,14 @@ setopt correct
 # PATH設定#{{{
 export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/:/usr/local/bin:~/bin:$PATH
 export MANPATH=$MANPATH:/opt/local/share/man:/usr/share/man/
-export WORKON_HOME=$HOME/.virtualenvs
-source `which virtualenvwrapper.sh`
 #}}}
+
+# virtualenv# {{{
+export WORKON_HOME=$HOME/.virtualenvs
+if which-s virtualenvwrapper; then
+  source `which virtualenvwrapper`
+fi
+# }}}
 
 # 色適用#{{{
 zstyle ':completion:*' list-colors 'di=36' 'ln=35'
