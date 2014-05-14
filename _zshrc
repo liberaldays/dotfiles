@@ -167,8 +167,8 @@ export MANPATH=$MANPATH:/opt/local/share/man:/usr/share/man/
 
 # virtualenv# {{{
 export WORKON_HOME=$HOME/.virtualenvs
-if which-s virtualenvwrapper; then
-  source `which virtualenvwrapper`
+if which-s virtualenvwrapper.sh; then
+  source `which virtualenvwrapper.sh`
 fi
 # }}}
 
