@@ -124,8 +124,9 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 end
+"}}}
 
-" 戦闘力
+" Scouter"{{{
 function! Scouter(file, ...)
   let pat = '^\s*$\|^\s*"'
   let lines = readfile(a:file)
@@ -272,12 +273,18 @@ endif
  " NeoBundle 'tyru/caw.vim'
  NeoBundle 'thinca/vim-quickrun'
  " Python 周り
- NeoBundle 'mitechie/pyflakes-pathogen'
+ NeoBundleLazy 'mitechie/pyflakes-pathogen', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
 "  NeoBundle 'vim-scripts/pythoncomplete'
  NeoBundleLazy 'lambdalisue/vim-django-support'
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
- NeoBundle 'alfredodeza/pytest.vim'
+ NeoBundleLazy 'alfredodeza/pytest.vim', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
 "  NeoBundle 'sontek/rope-vim'
  NeoBundleLazy "davidhalter/jedi-vim", {
        \ "autoload": {
@@ -829,3 +836,17 @@ let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
 " Vimux Prompt String
 let g:VimuxPromptString = "cmd:""}}}
+
+" Git settings"{{{
+noremap gs :<C-u>Gstatus<CR>
+noremap gc :<C-u>Gcommit<CR>
+noremap gp :<C-u>GitPush<CR>
+noremap gd :<C-u>Gdiff<CR>
+noremap gb :<C-u>Gblame<CR>
+"}}}
+
+" Pytest"{{{
+au FileType python noremap <S-t><S-f> :<C-u>Pytest file<CR>
+au FileType python noremap <S-t><S-p> :<C-u>Pytest project<CR>
+au FileType python noremap <S-t><S-s> :<C-u>Pytest session<CR>
+"}}}
