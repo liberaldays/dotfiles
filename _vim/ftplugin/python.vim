@@ -25,6 +25,11 @@ setl foldlevel=99
 " nose.vim
 compiler nose
 
+" pytest
+noremap <S-t><S-f> :<C-u>Pytest file<CR>
+noremap <S-t><S-p> :<C-u>Pytest project<CR>
+noremap <S-t><S-s> :<C-u>Pytest session<CR>
+
 " for jedi
 " let g:jedi#auto_initialization = 0
 " let g:jedi#auto_vim_configuration = 0

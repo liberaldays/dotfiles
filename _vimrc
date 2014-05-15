@@ -844,9 +844,3 @@ noremap gp :<C-u>GitPush<CR>
 noremap gd :<C-u>Gdiff<CR>
 noremap gb :<C-u>Gblame<CR>
 "}}}
-
-" Pytest"{{{
-au FileType python noremap <S-t><S-f> :<C-u>Pytest file<CR>
-au FileType python noremap <S-t><S-p> :<C-u>Pytest project<CR>
-au FileType python noremap <S-t><S-s> :<C-u>Pytest session<CR>
-"}}}
