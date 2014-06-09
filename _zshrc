@@ -190,6 +190,7 @@ fi
 
 # エイリアス# {{{
 alias tmux="tmux -2"
+alias vim='vim --servername VIM'
 alias ta="tmux attach"
 alias ipython="ipython-2.7"
 alias vp='vim -c "call VimpressSetting()"'

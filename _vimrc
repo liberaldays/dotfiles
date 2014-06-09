@@ -552,6 +552,11 @@ if s:meet_neocomplete_requirements()
   \ '[[:alnum:].\\]\+'
   let g:neocomplete#sources#omni#functions.r =
   \ 'rcomplete#CompleteR'
+  " Rmd (plugin: vim-R-plugin)
+  let g:neocomplete#sources#omni#input_patterns.rmd =
+  \ '[[:alnum:].\\]\+'
+  let g:neocomplete#sources#omni#functions.rmd =
+  \ 'rcomplete#CompleteR'
   " XQuery (plugin: XQuery-indentomnicomplete)
   let g:neocomplete#sources#omni#input_patterns.xquery =
   \ '\k\|:\|\-\|&'
