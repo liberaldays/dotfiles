@@ -704,6 +704,7 @@ let Tlist_Display_Tag_Scope = 1
 let Tlist_Exit_OnlyWindow = 1
 let tlist_tex_settings = 'latex;s:sections;l:labels;r:ref;g:graphic+listing'
 let tlist_r_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
+let tlist_rmd_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
 set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
 set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)"}}}
 
