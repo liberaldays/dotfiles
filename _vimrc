@@ -310,8 +310,8 @@ endif
        \ }}
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
- " NeoBundle 'jcfaria/Vim-R-plugin'
- NeoBundle 'vim-scripts/Vim-R-plugin'
+ NeoBundle 'jcfaria/Vim-R-plugin'
+ " NeoBundle 'vim-scripts/Vim-R-plugin'
  NeoBundle 'itchyny/lightline.vim'
  NeoBundle 'taglist.vim'
  NeoBundle 'sophacles/vim-processing'
