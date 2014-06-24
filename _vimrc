@@ -535,6 +535,9 @@ if s:meet_neocomplete_requirements()
         \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
   let g:clang_complete_auto = 0
   let g:clang_auto_select = 0
+  if has('mac')
+    let g:clang_library_path="/usr/lib"
+  endif
   "let g:clang_use_library = 1
 
   "For External plugin's completion
