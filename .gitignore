@@ -9,4 +9,4 @@ _vim/old_neobundle/
 *~
 *.swp
 *.swo
-*.org/*
+_vim.org/
