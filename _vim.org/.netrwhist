@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/private/var/www/seotools/WORD_DAT/kuma'
-let g:netrw_dirhist_2='/Users/Tomoaki/Dropbox/Program data/Ruby/1201/LinkedList'
