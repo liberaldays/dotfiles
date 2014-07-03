@@ -7,7 +7,7 @@ if "test -n '$SSH_CONNECTION'" "bind-key C-s send-prefix"
 set-option -g history-limit 4096
 set-option -g default-shell /bin/zsh
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
-set -g mode-mouse on
+#set -g mode-mouse on
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
 set-window-option -g utf8 on # 日本語環境なら今のところ必須。
