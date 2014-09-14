@@ -25,7 +25,7 @@ if(interactive()){
   library(setwidth)
   # Load the vimcom.plus library only if R was started by Vim:
   if(Sys.getenv("VIMRPLUGIN_TMPDIR") != ""){
-    library(vimcom.plus)
+    library(vimcom)
     # If you can't install the vimcom.plus package, do:
     # library(vimcom)
     # See R documentation on Vim buffer even if asking for help in R Console:

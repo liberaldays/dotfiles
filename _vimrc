@@ -338,6 +338,7 @@ endif
        \ 'depends' : 'xolox/vim-misc',
        \ }
  NeoBundle 'deton/jasegment.vim'
+ NeoBundle 'rizzatti/dash.vim'
  filetype on
  filetype plugin indent on
  NeoBundleCheck"}}}
