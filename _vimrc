@@ -27,6 +27,7 @@ set encoding=utf-8
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set clipboard += unnamed
 " autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
 " 検索を very magic で行う
