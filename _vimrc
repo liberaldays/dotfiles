@@ -27,7 +27,7 @@ set encoding=utf-8
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-set clipboard += unnamed
+" set clipboard += unnamed
 " autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
 " 検索を very magic で行う
@@ -819,7 +819,7 @@ unlet s:local_session_directory
 " vimux settings"{{{
 if &ft!='python'
   " Run bpython
-  noremap <Leader>vp :call VimuxRunCommand("ipython")<CR>
+  noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
   " Run the current file
   noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
   " Prompt for a command to run
@@ -835,8 +835,14 @@ if &ft!='python'
     call VimuxSendText(@v)
     "  call VimuxSendKeys("Enter")
   endfunction
+  function! SelectSend()
+    call writefile(split(@v, "\n"), "/tmp/pytmp.py")
+    call VimuxRunCommand("execfile('/tmp/pytmp.py')")
+    "  call VimuxSendKeys("Enter")
+  endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+  " vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+  vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>
   " send current line
   nmap <LocalLeader>d ^v$<LocalLeader>vs<CR>
   " Select current paragraph and send it to tmux
