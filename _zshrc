@@ -161,8 +161,8 @@ setopt correct
 #}}}
 
 # PATH設定#{{{
-export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/:/usr/local/bin:~/bin:$PATH
-export MANPATH=$MANPATH:/opt/local/share/man:/usr/share/man/
+export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:~/bin:$PATH
+export MANPATH=$MANPATH:/opt/local/share/man:/usr/share/man
 #}}}
 
 # virtualenv# {{{
