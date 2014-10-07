@@ -841,12 +841,12 @@ if &ft!='python'
     "  call VimuxSendKeys("Enter")
   endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
-  " vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+  vnoremap <LocalLeader>vms "vy :call VimuxSlime()<CR>
   vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>
   " send current line
-  nmap <LocalLeader>d ^v$<LocalLeader>vs<CR>
+  nmap <LocalLeader>d ^v$<LocalLeader>vms<CR>
   " Select current paragraph and send it to tmux
-  nmap <LocalLeader>vb vip<LocalLeader>vs<CR>
+  nmap <LocalLeader>vb vip<LocalLeader>vms<CR>
 endif
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
