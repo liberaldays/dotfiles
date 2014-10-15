@@ -210,7 +210,7 @@ nnoremap tu :GundoToggle<CR>
 filetype off
  if has('vim_starting')
    set runtimepath+=~/.vim/bundle/neobundle.vim/
-   call neobundle#rc(expand('~/.vim/bundle/'))
+   call neobundle#begin(expand('~/.vim/bundle/'))
  endif
 
  " NeoBundle本体
@@ -342,7 +342,10 @@ endif
  NeoBundle 'rizzatti/dash.vim'
  filetype on
  filetype plugin indent on
- NeoBundleCheck"}}}
+ NeoBundleCheck
+
+ call neobundle#end()
+ "}}}
 
 " Settings of VimShell"{{{
 " \is: シェルを起動
