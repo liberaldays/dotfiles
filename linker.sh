@@ -6,3 +6,4 @@ ln -si ~/dotfiles/_vimrc ~/.vimrc
 ln -si ~/dotfiles/_tmux_conf ~/.tmux.conf
 ln -si ~/dotfiles/_ctags ~/.ctags
 ln -si ~/dotfiles/.Rprofile ~/.Rprofile
+ln -si ~/dotfiles/.latexmkrc ~/.latexmkrc
