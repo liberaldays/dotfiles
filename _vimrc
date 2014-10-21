@@ -340,6 +340,7 @@ endif
        \ }
  NeoBundle 'deton/jasegment.vim'
  NeoBundle 'rizzatti/dash.vim'
+ NeoBundle 'scrooloose/syntastic'
  filetype on
  filetype plugin indent on
  NeoBundleCheck
