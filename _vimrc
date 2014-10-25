@@ -541,7 +541,7 @@ if s:meet_neocomplete_requirements()
   let g:clang_complete_auto = 0
   let g:clang_auto_select = 0
   if has("macunix")
-    let g:clang_library_path="/opt/local/libexec/llvm-3.3/lib"
+    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
   endif
   let g:clang_use_library = 1
 
