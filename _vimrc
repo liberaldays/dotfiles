@@ -27,6 +27,7 @@ set encoding=utf-8
 set nocompatible
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+" set clipboard += unnamed
 " autocmd BufWritePre * :%s/\s\+$//e
 autocmd InsertLeave * set nopaste
 " 検索を very magic で行う
@@ -209,7 +210,7 @@ nnoremap tu :GundoToggle<CR>
 filetype off
  if has('vim_starting')
    set runtimepath+=~/.vim/bundle/neobundle.vim/
-   call neobundle#rc(expand('~/.vim/bundle/'))
+   call neobundle#begin(expand('~/.vim/bundle/'))
  endif
 
  " NeoBundle本体
@@ -339,9 +340,16 @@ endif
        \ }
  NeoBundle 'deton/jasegment.vim'
  NeoBundle 'rizzatti/dash.vim'
+ NeoBundleLazy 'scrooloose/syntastic', {
+       \ "autoload": {
+       \   "filetypes": ["c","r","php","go","ruby"],
+       \ }}
  filetype on
  filetype plugin indent on
- NeoBundleCheck"}}}
+ NeoBundleCheck
+
+ call neobundle#end()
+ "}}}
 
 " Settings of VimShell"{{{
 " \is: シェルを起動
@@ -537,7 +545,7 @@ if s:meet_neocomplete_requirements()
   let g:clang_complete_auto = 0
   let g:clang_auto_select = 0
   if has("macunix")
-    let g:clang_library_path="/opt/local/libexec/llvm-3.3/lib"
+    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
   endif
   let g:clang_use_library = 1
 
@@ -691,7 +699,7 @@ call togglebg#map("")
 
 " foldCC Setings"{{{
 set foldtext=FoldCCtext()
-set foldcolumn=3
+set foldcolumn=4
 set fillchars=vert:\|
 highlight Folded gui=bold term=standout ctermbg=Black ctermfg=DarkCyan guibg=#555555 guifg=DarkCyan
 highlight FoldColumn gui=bold term=standout ctermbg=Black ctermfg=DarkBlue guibg=Black guifg=DarkBlue"}}}
@@ -818,7 +826,7 @@ unlet s:local_session_directory
 " vimux settings"{{{
 if &ft!='python'
   " Run bpython
-  noremap <Leader>vp :call VimuxRunCommand("ipython")<CR>
+  noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
   " Run the current file
   noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
   " Prompt for a command to run
@@ -834,12 +842,18 @@ if &ft!='python'
     call VimuxSendText(@v)
     "  call VimuxSendKeys("Enter")
   endfunction
+  function! SelectSend()
+    call writefile(split(@v, "\n"), "/tmp/pytmp.py")
+    call VimuxRunCommand("execfile('/tmp/pytmp.py')")
+    "  call VimuxSendKeys("Enter")
+  endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+  vnoremap <LocalLeader>vms "vy :call VimuxSlime()<CR>
+  vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>
   " send current line
-  nmap <LocalLeader>d ^v$<LocalLeader>vs<CR>
+  nmap <LocalLeader>d ^v$<LocalLeader>vms<CR>
   " Select current paragraph and send it to tmux
-  nmap <LocalLeader>vb vip<LocalLeader>vs<CR>
+  nmap <LocalLeader>vb vip<LocalLeader>vms<CR>
 endif
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
