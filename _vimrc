@@ -883,6 +883,7 @@ let g:VimuxPromptString = "cmd:""}}}
 
 " Git settings"{{{
 noremap gs :<C-u>Gstatus<CR>
+noremap gw :<C-u>Gwrite<CR>
 noremap gc :<C-u>Gcommit<CR>
 noremap gp :<C-u>Git push<CR>
 " :<C-u>GitPush<CR>
@@ -903,7 +904,8 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✑'
-" ✍ ✑ ☹ ⚡︎ ☞
+let g:syntastic_style_warning_symbol = '✏︎'
+" ✍ ✏︎ ✒︎ ✄ ✂︎ ☕︎ ✑ ☹ ⚡︎ ☞
 let g:syntastic_mode_map = { 'mode': 'passive',
       \ 'active_filetypes': ['ruby', 'r', 'c', 'go', 'php'],
       \ 'passive_filetypes': ['html']
