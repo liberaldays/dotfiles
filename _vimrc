@@ -339,10 +339,9 @@ endif
        \ }}
  NeoBundle 'vim-scripts/R-syntax-highlighting'
  NeoBundle 'LeafCage/foldCC'
- NeoBundleLazy 'motemen/git-vim', { 'autoload' : {
-       \ 'mappings' : [
-       \   '<Plug>(gitvim)']
-       \ }}
+"  NeoBundleLazy 'motemen/git-vim', { 'autoload' : {
+"        \ "commands": "GitPush",
+"        \ }}
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'xolox/vim-reload'
  NeoBundle 'xolox/vim-misc'
@@ -885,7 +884,8 @@ let g:VimuxPromptString = "cmd:""}}}
 " Git settings"{{{
 noremap gs :<C-u>Gstatus<CR>
 noremap gc :<C-u>Gcommit<CR>
-noremap gp :<C-u><Plug>(gitvim)GitPush<CR>
+noremap gp :<C-u>Git push<CR>
+" :<C-u>GitPush<CR>
 noremap gd :<C-u>Gdiff<CR>
 noremap gb :<C-u>Gblame<CR>
 "}}}
@@ -902,6 +902,8 @@ augroup END
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✑'
+" ✍ ✑ ☹ ⚡︎ ☞
 let g:syntastic_mode_map = { 'mode': 'passive',
       \ 'active_filetypes': ['ruby', 'r', 'c', 'go', 'php'],
       \ 'passive_filetypes': ['html']
@@ -909,14 +911,15 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 " let g:syntastic_auto_loc_list=1
 noremap \gs :<C-u>SyntasticToggleMode<CR>
 noremap \gc :<C-u>SyntasticCheck<CR>
+noremap \gl :<C-u>SyntasticSetLoclist<CR>
 let g:syntastic_enable_highlighting=1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_enable_r_svtools_checker=1
 let g:syntastic_enable_r_lint_checker=1
-let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
+" let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
 let g:syntastic_r_checkers = ['svtools', 'lint']
 let g:syntastic_python_checker = 'flake8'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 "}}}
