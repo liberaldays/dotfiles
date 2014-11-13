@@ -760,13 +760,14 @@ let g:lightline = {
       \ 'colorscheme': 'default',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', 'virtualenv' ] ]
       \ },
       \ 'component_function': {
       \   'modified': 'MyModified',
       \   'readonly': 'MyReadonly',
       \   'fugitive': 'MyFugitive',
       \   'filename': 'MyFilename',
+      \   'virtualenv': 'MyVirtualenv',
       \   'fileformat': 'MyFileformat',
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
@@ -801,6 +802,14 @@ function! MyFugitive()
   return ''
 endfunction
 
+function! MyVirtualenv()
+  if &ft !~? 'vimfiler\|gundo' && exists("*virtualenv#statusline")
+    let _ = virtualenv#statusline()
+    return strlen(_) ? '✇ '._ : ''
+  endif
+  return ''
+endfunction
+" ✇☤⚒ ⚖ ⚚
 function! MyFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
 endfunction
