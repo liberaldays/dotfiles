@@ -322,10 +322,10 @@ endif
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ }}
- " NeoBundleLazy 'hynek/vim-python-pep8-indent', {
- "       \ "autoload": {
- "       \   "filetypes": ["python", "python3", "djangohtml"],
- "       \ }}
+ NeoBundleLazy 'hynek/vim-python-pep8-indent', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
  NeoBundle 'jcfaria/Vim-R-plugin'
