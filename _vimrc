@@ -1,7 +1,7 @@
 " First setings"{{{
 set t_Co=256
 set tags=tags
-let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"  " ctagsのコマンド
 set modeline
 set number
 set numberwidth=5
@@ -274,11 +274,6 @@ endif
  " NeoBundle 'tyru/caw.vim'
  NeoBundle 'thinca/vim-quickrun'
  " Python 周り
- NeoBundleLazy 'mitechie/pyflakes-pathogen', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
-"  NeoBundle 'vim-scripts/pythoncomplete'
  NeoBundleLazy 'lambdalisue/vim-django-support'
  NeoBundle 'reinh/vim-makegreen'
  NeoBundle 'lambdalisue/nose.vim'
@@ -302,10 +297,32 @@ endif
        \ }}
  NeoBundle 'benmills/vimux'
  " NeoBundle 'ivanov/vim-ipython'
- NeoBundle 'nvie/vim-flake8'
- NeoBundle 'hdima/python-syntax'
+ NeoBundleLazy 'nvie/vim-flake8', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
+ NeoBundleLazy 'mitechie/pyflakes-pathogen', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
+ NeoBundleLazy 'tell-k/vim-autopep8', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ },
+       \ "build": {
+       \   "mac": "pip install jedi",
+       \   "unix": "pip install jedi",
+       \ }}
+ NeoBundleLazy 'hdima/python-syntax', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
  " NeoBundle 'nathanaelkane/vim-indent-guides'
  NeoBundleLazy 'Yggdroot/indentLine', {
+       \ "autoload": {
+       \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
+ NeoBundleLazy 'hynek/vim-python-pep8-indent', {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
        \ }}
@@ -322,7 +339,9 @@ endif
        \ }}
  NeoBundle 'vim-scripts/R-syntax-highlighting'
  NeoBundle 'LeafCage/foldCC'
- NeoBundle 'motemen/git-vim'
+"  NeoBundleLazy 'motemen/git-vim', { 'autoload' : {
+"        \ "commands": "GitPush",
+"        \ }}
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'xolox/vim-reload'
  NeoBundle 'xolox/vim-misc'
@@ -340,9 +359,10 @@ endif
        \ }
  NeoBundle 'deton/jasegment.vim'
  NeoBundle 'rizzatti/dash.vim'
+ NeoBundle 'osyo-manga/vim-precious'
  NeoBundleLazy 'scrooloose/syntastic', {
        \ "autoload": {
-       \   "filetypes": ["c","r","php","go","ruby"],
+       \   "filetypes": ["c","r","php","go","ruby", "python"],
        \ }}
  filetype on
  filetype plugin indent on
@@ -544,7 +564,7 @@ if s:meet_neocomplete_requirements()
         \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
   let g:clang_complete_auto = 0
   let g:clang_auto_select = 0
-  if has("macunix")
+  if has("mac")
     let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
   endif
   let g:clang_use_library = 1
@@ -863,8 +883,45 @@ let g:VimuxPromptString = "cmd:""}}}
 
 " Git settings"{{{
 noremap gs :<C-u>Gstatus<CR>
+noremap gw :<C-u>Gwrite<CR>
 noremap gc :<C-u>Gcommit<CR>
-noremap gp :<C-u>GitPush<CR>
+noremap gp :<C-u>Git push<CR>
+" :<C-u>GitPush<CR>
 noremap gd :<C-u>Gdiff<CR>
 noremap gb :<C-u>Gblame<CR>
+"}}}
+
+" indentLine"{{{
+augroup precious-indentLine
+  autocmd!
+  " precious.vim が filetype を切り替える度に indentLine をリセットする
+  autocmd User PreciousFileType IndentLinesReset
+augroup END
+"}}}
+
+" syntastic"{{{
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '✑'
+let g:syntastic_style_warning_symbol = '✏︎'
+" ✍ ✏︎ ✒︎ ✄ ✂︎ ☕︎ ✑ ☹ ⚡︎ ☞
+let g:syntastic_mode_map = { 'mode': 'passive',
+      \ 'active_filetypes': ['ruby', 'r', 'c', 'go', 'php'],
+      \ 'passive_filetypes': ['html']
+      \}
+" let g:syntastic_auto_loc_list=1
+noremap \gs :<C-u>SyntasticToggleMode<CR>
+noremap \gc :<C-u>SyntasticCheck<CR>
+noremap \gl :<C-u>SyntasticSetLoclist<CR>
+let g:syntastic_enable_highlighting=1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_enable_r_svtools_checker=1
+let g:syntastic_enable_r_lint_checker=1
+" let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
+let g:syntastic_r_checkers = ['svtools', 'lint']
+let g:syntastic_python_checker = 'flake8'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 "}}}
