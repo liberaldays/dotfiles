@@ -125,6 +125,8 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 end
+au BufRead,BufNewFile *.pde set filetype=processing
+au BufRead,BufNewFile *.ino set filetype=arduino
 "}}}
 
 " Scouter"{{{
@@ -332,7 +334,10 @@ endif
  " NeoBundle 'vim-scripts/Vim-R-plugin'
  NeoBundle 'itchyny/lightline.vim'
  NeoBundle 'taglist.vim'
- NeoBundle 'sophacles/vim-processing'
+ NeoBundleLazy 'sophacles/vim-processing', {
+       \ "autoload": {
+       \  "filetypes": ["processing"],
+       \ }}
  NeoBundleLazy 'git://git.code.sf.net/p/vim-latex/vim-latex', {
        \ "autoload": {
        \   "filetypes": ["tex"],
@@ -428,11 +433,13 @@ let g:quickrun_config = {
             \ },
             \ 'python' : {
             \   'command' : 'python2.7',
+            \   'outputter' : 'error',
+            \   'outputter/error/error' : 'quickfix',
             \ },
             \ 'processing' : {
             \     'command': 'processing-java',
-            \     'exec': '%c --sketch=$PWD/ --output=/Library/Processing --run --force',
-            \   }}
+            \     'exec': '%c --sketch=%s:p:h/ --output=/tmp/processing --run --force'
+            \  }}
 let g:quickrun_config['_'] = {
             \   'runner' : 'vimproc',
             \   'runner/vimproc/updatetime' : 100,
