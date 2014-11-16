@@ -803,7 +803,7 @@ function! MyFugitive()
 endfunction
 
 function! MyVirtualenv()
-  if &ft !~? 'vimfiler\|gundo' && exists("*virtualenv#statusline")
+  if &ft !~? 'help\|vimfiler\|gundo' && exists("*virtualenv#statusline")
     let _ = virtualenv#statusline()
     return strlen(_) ? '✇ '._ : ''
   endif
