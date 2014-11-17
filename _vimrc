@@ -433,8 +433,6 @@ let g:quickrun_config = {
             \ },
             \ 'python' : {
             \   'command' : 'python2.7',
-            \   'outputter' : 'error',
-            \   'outputter/error/error' : 'quickfix',
             \ },
             \ 'processing' : {
             \     'command': 'processing-java',
