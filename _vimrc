@@ -925,7 +925,7 @@ let g:syntastic_style_error_symbol = '✑'
 let g:syntastic_style_warning_symbol = '✏︎'
 " ✍ ✏︎ ✒︎ ✄ ✂︎ ☕︎ ✑ ☹ ⚡︎ ☞
 let g:syntastic_mode_map = { 'mode': 'passive',
-      \ 'active_filetypes': ['ruby', 'r', 'c', 'go', 'php'],
+      \ 'active_filetypes': ['ruby', 'c', 'go', 'php'],
       \ 'passive_filetypes': ['html']
       \}
 " let g:syntastic_auto_loc_list=1
