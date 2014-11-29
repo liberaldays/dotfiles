@@ -1,7 +1,7 @@
 " First setings"{{{
 set t_Co=256
 set tags=tags
-let Tlist_Ctags_Cmd = "ctags"  " ctagsのコマンド
+let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
 set modeline
 set number
 set numberwidth=5
