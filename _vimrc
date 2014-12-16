@@ -344,9 +344,6 @@ endif
        \ }}
  NeoBundle 'vim-scripts/R-syntax-highlighting'
  NeoBundle 'LeafCage/foldCC'
-"  NeoBundleLazy 'motemen/git-vim', { 'autoload' : {
-"        \ "commands": "GitPush",
-"        \ }}
  NeoBundle 'tpope/vim-fugitive'
  NeoBundle 'xolox/vim-reload'
  NeoBundle 'xolox/vim-misc'
@@ -881,8 +878,8 @@ if &ft!='python'
     "  call VimuxSendKeys("Enter")
   endfunction
   function! SelectSend()
-    call writefile(split(@v, "\n"), "/tmp/pytmp.py")
-    call VimuxRunCommand("execfile('/tmp/pytmp.py')")
+    call writefile(split(@v, "\n"), "pytmp.py")
+    call VimuxRunCommand("execfile('pytmp.py')")
     "  call VimuxSendKeys("Enter")
   endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
