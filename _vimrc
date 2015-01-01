@@ -366,6 +366,10 @@ endif
        \ "autoload": {
        \   "filetypes": ["c","r","php","go","ruby", "python"],
        \ }}
+ NeoBundle 'haya14busa/incsearch.vim', {
+       \ 'depends' : 'osyo-manga/vital-over',
+       \ }
+ NeoBundle 'Lokaltog/vim-easymotion'
  filetype on
  filetype plugin indent on
  NeoBundleCheck
@@ -939,4 +943,51 @@ let g:syntastic_python_checker = 'flake8'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
+"}}}
+
+" incsearch"{{{
+ map /  <Plug>(incsearch-forward)
+ map ?  <Plug>(incsearch-backward)
+ map g/ <Plug>(incsearch-stay)
+ " let g:incsearch#auto_nohlsearch = 1
+ " map n  <Plug>(incsearch-nohl-n)
+ " map N  <Plug>(incsearch-nohl-N)
+ " map *  <Plug>(incsearch-nohl-*)
+ " map #  <Plug>(incsearch-nohl-#)
+ " map g* <Plug>(incsearch-nohl-g*)
+ " map g# <Plug>(incsearch-nohl-g#)
+ "}}}
+
+" easymotion"{{{
+let g:EasyMotion_do_mapping = 0 "Disable default mappings
+nmap s <Plug>(easymotion-s2)
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+omap <Leader>w <Plug>(easymotion-bd-wl)
+omap <Leader>e <Plug>(easymotion-bd-el)
+xmap s <Plug>(easymotion-s2)
+" surround.vimと被らないように
+omap z <Plug>(easymotion-s2)
+" Jump to first match with enter & space
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+" =======================================
+" Search Motions
+" =======================================
+" Extend search motions with vital-over command line interface
+" Incremental highlight of all the matches
+" Now, you don't need to repetitively press `n` or `N` with EasyMotion feature
+" `<Tab>` & `<S-Tab>` to scroll up/down a page of next match
+" :h easymotion-command-line
+nmap g/ <Plug>(easymotion-sn)
+xmap g/ <Plug>(easymotion-sn)
+omap g/ <Plug>(easymotion-tn)
+" Repeat
+map <Leader><Leader> <Plug>(easymotion-repeat)
+map <C-n> <Plug>(easymotion-next)
+map <C-p> <Plug>(easymotion-prev)
+" map ; <Plug>(easymotion-next)
+" map , <Plug>(easymotion-prev)
 "}}}
