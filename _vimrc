@@ -370,6 +370,7 @@ endif
        \ 'depends' : 'osyo-manga/vital-over',
        \ }
  NeoBundle 'Lokaltog/vim-easymotion'
+ NeoBundle 'ujihisa/neco-look'
  filetype on
  filetype plugin indent on
  NeoBundleCheck
