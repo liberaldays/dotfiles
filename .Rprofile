@@ -30,7 +30,7 @@ if(interactive()){
     # library(vimcom)
     # See R documentation on Vim buffer even if asking for help in R Console:
     if(Sys.getenv("VIM_PANE") != "")
-      options(help_type = "text", pager = vim.pager)
+      options(help_type = "text", pager = "vimrpager")
   }
 }
 

@@ -4,4 +4,4 @@ inoremap <buffer> _ <ESC>:call ReplaceUnderS()<CR>a
 let vimrplugin_vsplit = 1
 let vimrplugin_rconsole_width = 80
 let vimrplugin_listmethods = 1
-let vimrplugin_permanent_libs = "base,stats,graphics,grDevices,utils,methods"
+let vimrplugin_start_libs = "base,stats,graphics,grDevices,utils,methods"
