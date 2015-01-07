@@ -1,0 +1,16 @@
+# %HERE%
+```{r setup, echo = FALSE}
+library(pander)
+opts_chunk$set(comment = NA, tidy = FALSE)
+panderOptions("table.style", "rmarkdown")
+panderOptions("table.split.table", 200)
+panderOptions("keep.trailing.zeros", TRUE)
+date <- as.character(Sys.time())
+print(date)
+```
+
+**%FILE%**
+
+
+
+__Copyright (C) %YEAR% %USER% <%MAIL%>__
