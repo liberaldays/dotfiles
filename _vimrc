@@ -994,7 +994,7 @@ map <C-p> <Plug>(easymotion-prev)
 "}}}
 
 " template
-let g:templates_directory = ['~/.vim/ftplugin/templates/']
+let g:templates_directory = ['~/.vim/templates/']
 let g:templates_no_builtin_templates = 1
 let g:templates_name_prefix = 'template.'
 let g:templates_global_name_prefix = 'template.'
