@@ -883,8 +883,8 @@ if &ft!='python'
     "  call VimuxSendKeys("Enter")
   endfunction
   function! SelectSend()
-    call writefile(split(@v, "\n"), "pytmp.py")
-    call VimuxRunCommand("execfile('pytmp.py')")
+    call writefile(split(@v, "\n"), "/home/data/chiba/tmp/pytmp.py")
+    call VimuxRunCommand("execfile('/home/data/chiba/tmp/pytmp.py')")
     "  call VimuxSendKeys("Enter")
   endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
