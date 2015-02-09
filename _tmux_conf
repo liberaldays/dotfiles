@@ -45,5 +45,5 @@ set-option -g default-terminal "screen-256color"
 # }}}
 
 # P-rで再起動
-bind r source-file ~/.tmux.conf; display-message "Reload Config!!"
+bind r source-file ~/.tmux.conf\; display-message "Reload Config!!"
 
