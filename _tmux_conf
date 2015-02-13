@@ -13,7 +13,7 @@ set -g mouse-resize-pane on
 set-window-option -g utf8 on # 日本語環境なら今のところ必須。
 set-window-option -g mode-keys vi # コピーモードのキーマップ。標準はemacs
 ## Mac の tmux でクリップボードをつかう
-# set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-command "reattach-to-user-namespace -l zsh"
 # Setup 'v' to begin selection as in Vim
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
