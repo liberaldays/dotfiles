@@ -154,14 +154,6 @@ autocmd MyAutoCmd BufWritePre * call s:mkdir(expand('<afile>:p:h'), v:cmdbang)
 "}}}
 
 " KEY BIND "{{{
-inoremap <C-A> <Home>
-inoremap <C-E> <End>
-inoremap <C-D> <Del>
-inoremap <C-W> <BS>
-
-inoremap <C-H> <Left>
-" inoremap <C-J> <Down>
-" inoremap <C-K> <Up>
 inoremap <C-L> <Right>
 
 noremap ; :
@@ -190,12 +182,12 @@ noremap md :<C-u>lcd %:p:h<CR>
 "" 引用符等の設定
 "----------------------------------------------------
 "" カッコやクオートなどを入力した際に左に自動で移動します
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap () ()<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap <> <><Left>
+inoremap {} {}<++><Left>
+inoremap [] []<++><Left>
+inoremap () ()<++><Left>
+inoremap "" ""<++><Left>
+inoremap '' ''<++><Left>
+inoremap <> <><++><Left>
 vnoremap {} di{<Esc>pa}<Esc>
 vnoremap [] di[<Esc>pa]<Esc>
 vnoremap () di(<Esc>pa)<Esc>
