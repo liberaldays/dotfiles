@@ -182,12 +182,12 @@ noremap md :<C-u>lcd %:p:h<CR>
 "" 引用符等の設定
 "----------------------------------------------------
 "" カッコやクオートなどを入力した際に左に自動で移動します
-inoremap {} {}<++><Left>
-inoremap [] []<++><Left>
-inoremap () ()<++><Left>
-inoremap "" ""<++><Left>
-inoremap '' ''<++><Left>
-inoremap <> <><++><Left>
+inoremap {} {}<++><Esc>4hi
+inoremap [] []<++><Esc>4hi
+inoremap () ()<++><Esc>4hi
+inoremap "" ""<++><Esc>4hi
+inoremap '' ''<++><Esc>4hi
+inoremap <> <><++><Esc>4hi
 vnoremap {} di{<Esc>pa}<Esc>
 vnoremap [] di[<Esc>pa]<Esc>
 vnoremap () di(<Esc>pa)<Esc>
