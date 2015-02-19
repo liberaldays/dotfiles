@@ -1,7 +1,7 @@
 " First setings"{{{
 set t_Co=256
 set tags=tags
-let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
+" let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"  " ctagsのコマンド
 set modeline
 set number
 set numberwidth=5
@@ -169,7 +169,7 @@ noremap <Esc><Esc> :nohlsearch<CR>
 nnoremap <silent> <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>:<C-u>lcd %:p:h<CR>
 nnoremap <silent> <Space>s. :<C-u>source $MYVIMRC<CR>
 
-noremap tL :<C-u>Tlist<CR>
+noremap tL :<C-u>TagbarToggle<CR>
 noremap tn :<C-u>tabnext<CR>
 noremap tp :<C-u>tabprevious<CR>
 noremap tf :<C-u>tabfirst<CR>
@@ -325,7 +325,7 @@ endif
  NeoBundle 'jcfaria/Vim-R-plugin'
  " NeoBundle 'vim-scripts/Vim-R-plugin'
  NeoBundle 'itchyny/lightline.vim'
- NeoBundle 'taglist.vim'
+ NeoBundle 'majutsushi/tagbar'
  NeoBundleLazy 'sophacles/vim-processing', {
        \ "autoload": {
        \  "filetypes": ["processing"],
@@ -409,10 +409,16 @@ let g:vimfiler_marked_file_icon = '*'
 let g:quickrun_config = {
             \ 'tex' : {
             \   'command' : 'latexmk',
-            \   'cmdopt' : '-c',
             \   'outputter' : 'error',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c']
+            \   'exec': ['%c %s']
+            \ },
+            \ 'tex/lualatex' : {
+            \   'command' : 'latexmk',
+            \   'cmdopt' : '-gg -pdf',
+            \   'outputter' : 'error',
+            \   'outputter/error/error' : 'quickfix',
+            \   'exec': ['%c %o %s']
             \ },
             \ 'sh' : {
             \   'outputter' : 'multi:buffer:quickfix',
@@ -735,13 +741,102 @@ syn keyword Todo FIXME NOTE NOTES TODO XXX COMBAK BUG DEBUG HACK contained"}}}
 " taglist"{{{
 " let Tlist_Use_Right_Window = 1
 " let Tlist_Display_Prototype = 1
-let Tlist_Display_Tag_Scope = 1
-let Tlist_Exit_OnlyWindow = 1
-let tlist_tex_settings = 'latex;s:sections;l:labels;r:ref;g:graphic+listing'
-let tlist_r_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
-let tlist_rmd_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
-set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
-set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)"}}}
+" let Tlist_Display_Tag_Scope = 1
+" let Tlist_Exit_OnlyWindow = 1
+" let tlist_tex_settings = 'latex;s:sections;l:labels;r:ref;g:graphic+listing'
+" let tlist_r_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
+" let tlist_rmd_settings = 'R;f:Functions;g:GlobalVariables;v:FunctionVariables'
+" set title titlestring=%<%f\ %([%{Tlist_Get_Tagname_By_Line()}]%)
+" set statusline=%<%f%=%([%{Tlist_Get_Tagname_By_Line()}]%)"}}}
+
+" tagbar"{{{
+let g:tagbar_type_r = {
+    \ 'ctagstype' : 'r',
+    \ 'kinds'     : [
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
+
+let g:tagbar_type_rmd = {
+    \ 'ctagstype' : 'rmd',
+    \ 'kinds'     : [
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
+
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+
+let g:tagbar_type_haskell = {
+    \ 'ctagsbin'  : 'hasktags',
+    \ 'ctagsargs' : '-x -c -o-',
+    \ 'kinds'     : [
+        \  'm:modules:0:1',
+        \  'd:data: 0:1',
+        \  'd_gadt: data gadt:0:1',
+        \  't:type names:0:1',
+        \  'nt:new types:0:1',
+        \  'c:classes:0:1',
+        \  'cons:constructors:1:1',
+        \  'c_gadt:constructor gadt:1:1',
+        \  'c_a:constructor accessors:1:1',
+        \  'ft:function types:1:1',
+        \  'fi:function implementations:0:1',
+        \  'o:others:0:1'
+    \ ],
+    \ 'sro'        : '.',
+    \ 'kind2scope' : {
+        \ 'm' : 'module',
+        \ 'c' : 'class',
+        \ 'd' : 'data',
+        \ 't' : 'type'
+    \ },
+    \ 'scope2kind' : {
+        \ 'module' : 'm',
+        \ 'class'  : 'c',
+        \ 'data'   : 'd',
+        \ 'type'   : 't'
+    \ }
+\ }
+
+let g:tagbar_type_tex = {
+    \ 'ctagstype' : 'latex',
+    \ 'kinds'     : [
+        \ 's:sections',
+        \ 'l:labels',
+        \ 'r:ref',
+        \ 'g:graphic+listing'
+    \]
+\ }
+
+
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : 'markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+"}}}
 
 " vim-latex"{{{
 set grepprg=grep\ -nH\ $*
