@@ -1,0 +1,8 @@
+*~
+._*
+.DS_Store
+.gitCOMMIT_EDITMSG
+*.swp
+*.swo
+*.pyc
+__pycache__
