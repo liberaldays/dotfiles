@@ -4,7 +4,7 @@ bind-key C-s send-prefix
 if "test -n '$SSH_CONNECTION'" "set-option -g prefix C-g"
 if "test -n '$SSH_CONNECTION'" "unbind-key C-s"
 if "test -n '$SSH_CONNECTION'" "bind-key C-s send-prefix"
-set-option -g history-limit 4096
+set-option -g history-limit 8000
 set-option -g default-shell $SHELL
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 set -g mode-mouse on
