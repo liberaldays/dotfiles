@@ -39,9 +39,9 @@ autocmd InsertLeave * set nopaste
 " highlight CursorColumn ctermbg=Blue
 " highlight CursorColumn ctermfg=Green
 
-filetype on
-filetype indent on
-filetype plugin on
+" filetype off
+" filetype plugin indent off
+filetype plugin indent on
 "
 " XXX Undo Tree
 if has('persistent_undo')
@@ -182,12 +182,14 @@ noremap md :<C-u>lcd %:p:h<CR>
 "" 引用符等の設定
 "----------------------------------------------------
 "" カッコやクオートなどを入力した際に左に自動で移動します
-inoremap {} {}<++><Esc>4hi
-inoremap [] []<++><Esc>4hi
-inoremap () ()<++><Esc>4hi
-inoremap "" ""<++><Esc>4hi
-inoremap '' ''<++><Esc>4hi
-inoremap <> <><++><Esc>4hi
+" FIXME: set mapping according to filetype
+inoremap {} {}<Esc>i
+inoremap [] []<Esc>i
+inoremap () ()<Esc>i
+inoremap "" ""<Esc>i
+inoremap '' ''<Esc>i
+inoremap <> <><Esc>i
+
 vnoremap {} di{<Esc>pa}<Esc>
 vnoremap [] di[<Esc>pa]<Esc>
 vnoremap () di(<Esc>pa)<Esc>
@@ -951,7 +953,7 @@ unlet s:local_session_directory
 "}}}
 
 " vimux settings"{{{
-if &ft!='python'
+if &ft =~ 'python'
   " Run bpython
   noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
   " Run the current file
