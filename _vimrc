@@ -450,7 +450,7 @@ let g:quickrun_config['_'] = {
 "       \  "runner" : "vimproc",
 "       \}
 nmap <Leader>r <Plug>(quickrun)
-nmap <Leader>rl :<C-u>QuickRun tex/lualatex<CR>
+nmap <expr><Leader>lr quickrun#run('tex/lualatex')
 set splitright
 "}}}
 
