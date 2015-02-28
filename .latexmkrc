@@ -16,5 +16,3 @@ if ($^O eq 'darwin') {
 } else {
   $pdf_previewer = 'xdg-open';
 }
-
-# latexmk for lualatex: latexmk -gg -pdf
