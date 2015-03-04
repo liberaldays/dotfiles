@@ -1,3 +1,4 @@
+options(repos="http://cran.ism.ac.jp/")
 if(interactive()){
   # Get startup messages of three packages and set Vim as R pager:
   options(setwidth.verbose = 1,
@@ -77,5 +78,4 @@ assign("familyset_hook",
        pos="JapanEnv")
 setHook("plot.new", get("familyset_hook", pos="JapanEnv"))
 setHook("persp", get("familyset_hook", pos="JapanEnv"))
-options(repos="http://cran.ism.ac.jp/")
-#options(error=function() traceback(2))
+options(error=function() traceback(2))

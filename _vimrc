@@ -1051,14 +1051,14 @@ let g:syntastic_python_checker = 'flake8'
 
 " easymotion"{{{
 let g:EasyMotion_do_mapping = 0 "Disable default mappings
-nmap s <Plug>(easymotion-s2)
+nmap ; <Plug>(easymotion-s2)
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
 map F <Plug>(easymotion-Fl)
 map T <Plug>(easymotion-Tl)
 omap <Leader>w <Plug>(easymotion-bd-wl)
 omap <Leader>e <Plug>(easymotion-bd-el)
-xmap s <Plug>(easymotion-s2)
+xmap ; <Plug>(easymotion-s2)
 " surround.vimと被らないように
 omap z <Plug>(easymotion-s2)
 " Jump to first match with enter & space
