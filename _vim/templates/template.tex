@@ -1,17 +1,33 @@
-% vim:ft=tex:
-%
-\documentclass[11pt]{article}
-\usepackage[spanish]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage{graphicx}
+\documentclass[11pt,oneside,openany]{ltjsarticle}
+%\usepackage{fancyhdr}
+\usepackage{luatexja}
+\usepackage[hiragino-pron]{luatexja-preset}
+\usepackage{ascmac}
+\usepackage{fancybox}
+\usepackage{amsmath,amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage[top=25truemm,bottom=25truemm,left=25truemm,right=25truemm]{geometry}
 
-\title{
-	%FILE%
-}
-\author{
-	%USER% --- \texttt{%MAIL%}
-}
+\graphicspath{{./graphics/}}
+\newcommand{\Alref}[1]{Algorithm~\ref{#1}}
+\newcommand{\Equref}[1]{式~(\ref{#1})}
+\newcommand{\Figref}[1]{図~\ref{#1}}
+\newcommand{\Secref}[1]{\ref{#1}~節}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mr}{\mathrm}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
+\bibliographystyle{junsrt}
+\renewcommand{\bibname}{参考文献}
+
+\title{%FILE%}
+\author{%USER%}
+\date{\today}
 \begin{document}
 \maketitle
 
