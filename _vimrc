@@ -954,19 +954,24 @@ unlet s:local_session_directory
 "}}}
 
 " vimux settings"{{{
+" Prompt for a command to run
+noremap <Leader>vc :VimuxPromptCommand<CR>
+" Inspect runner pane
+noremap <Leader>vi :VimuxInspectRunner<CR>
+" Close vim tmux runner opened by VimuxRunCommand
+noremap <Leader>vq :VimuxCloseRunner<CR>
+" Zoom the runner pane (use <bind-key> z to restore runner pane)
+noremap <Leader>vz :call VimuxZoomRunner()<CR>
+vnoremap <LocalLeader>vms "vy :call VimuxSlime()<CR>
+" send current line
+nmap <LocalLeader>d ^v$<LocalLeader>vms<CR>
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vb vip<LocalLeader>vms<CR>
 if &ft =~ 'python'
-  " Run bpython
+  " Run ipython
   noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
   " Run the current file
   noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
-  " Prompt for a command to run
-  noremap <Leader>vc :VimuxPromptCommand<CR>
-  " Inspect runner pane
-  noremap <Leader>vi :VimuxInspectRunner<CR>
-  " Close vim tmux runner opened by VimuxRunCommand
-  noremap <Leader>vq :VimuxCloseRunner<CR>
-  " Zoom the runner pane (use <bind-key> z to restore runner pane)
-  noremap <Leader>vz :call VimuxZoomRunner()<CR>
   " Vimux as tslime replacement
   function! VimuxSlime()
     call VimuxSendText(@v)
@@ -978,12 +983,7 @@ if &ft =~ 'python'
     "  call VimuxSendKeys("Enter")
   endfunction
   " If text is selected, save it in the v buffer and send that buffer it to tmux
-  vnoremap <LocalLeader>vms "vy :call VimuxSlime()<CR>
   vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>
-  " send current line
-  nmap <LocalLeader>d ^v$<LocalLeader>vms<CR>
-  " Select current paragraph and send it to tmux
-  nmap <LocalLeader>vb vip<LocalLeader>vms<CR>
 endif
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
