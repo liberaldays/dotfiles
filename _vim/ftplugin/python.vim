@@ -66,3 +66,16 @@ autocmd BufWinEnter,TabEnter,FileType python
 " let g:indent_guides_enable_on_vim_startup = 1
 
 " colorscheme
+"
+" Vimux
+" Run ipython
+noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
+" Run the current file
+noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
+function! SelectSend()
+ call writefile(split(@v, "\n"), "/home/data/chiba/tmp/pytmp.py")
+ call VimuxRunCommand("execfile('/home/data/chiba/tmp/pytmp.py')")
+ "  call VimuxSendKeys("Enter")
+endfunction
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>

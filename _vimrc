@@ -962,29 +962,17 @@ noremap <Leader>vi :VimuxInspectRunner<CR>
 noremap <Leader>vq :VimuxCloseRunner<CR>
 " Zoom the runner pane (use <bind-key> z to restore runner pane)
 noremap <Leader>vz :call VimuxZoomRunner()<CR>
+" Vimux as tslime replacement
 vnoremap <LocalLeader>vms "vy :call VimuxSlime()<CR>
 " send current line
-nmap <LocalLeader>d ^v$<LocalLeader>vms<CR>
+nmap <LocalLeader>se ^v$<LocalLeader>vms<CR>
 " Select current paragraph and send it to tmux
 nmap <LocalLeader>vb vip<LocalLeader>vms<CR>
-if &ft =~ 'python'
-  " Run ipython
-  noremap <Leader>vp :call VimuxRunCommand("workon graph; ipython")<CR>
-  " Run the current file
-  noremap <silent> <Leader>vx :call VimuxRunCommand("execfile('" . bufname("%") . "')")<CR>
-  " Vimux as tslime replacement
-endif
+" Vimux as tslime replacement
 function! VimuxSlime()
   call VimuxSendText(@v)
   "  call VimuxSendKeys("Enter")
 endfunction
-function! SelectSend()
-  call writefile(split(@v, "\n"), "/home/data/chiba/tmp/pytmp.py")
-  call VimuxRunCommand("execfile('/home/data/chiba/tmp/pytmp.py')")
-  "  call VimuxSendKeys("Enter")
-endfunction
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vnoremap <LocalLeader>vs "vy :call SelectSend()<CR>
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
