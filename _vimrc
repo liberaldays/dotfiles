@@ -324,8 +324,9 @@ endif
        \ }}
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
- " NeoBundle 'jcfaria/Vim-R-plugin'
- NeoBundle 'vim-scripts/Vim-R-plugin'
+ NeoBundle 'jalvesaq/R-Vim-runtime'
+ NeoBundle 'jcfaria/Vim-R-plugin'
+ " NeoBundle 'vim-scripts/Vim-R-plugin'
  NeoBundle 'itchyny/lightline.vim'
  NeoBundle 'majutsushi/tagbar'
  NeoBundleLazy 'sophacles/vim-processing', {
@@ -1065,8 +1066,8 @@ xmap g/ <Plug>(easymotion-sn)
 omap g/ <Plug>(easymotion-tn)
 " Repeat
 map <Leader><Leader> <Plug>(easymotion-repeat)
-map <C-n> <Plug>(easymotion-next)
-map <C-p> <Plug>(easymotion-prev)
+" map <C-n> <Plug>(easymotion-next)
+" map <C-p> <Plug>(easymotion-prev)
 " map ; <Plug>(easymotion-next)
 " map , <Plug>(easymotion-prev)
 "}}}
