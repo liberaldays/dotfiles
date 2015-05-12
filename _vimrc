@@ -127,6 +127,7 @@ if !exists(":DiffOrig")
 end
 au BufRead,BufNewFile *.pde set filetype=processing
 au BufRead,BufNewFile *.ino set filetype=arduino
+au BufRead,BufNewFile *.md set filetype=markdown
 "}}}
 
 " Scouter"{{{
@@ -200,6 +201,8 @@ vnoremap <> di<<Esc>pa><Esc>
 " Gundo Toggle ==UndoTree==
 nnoremap tu :GundoToggle<CR>
 
+" Markmon open
+noremap <silent> gm :!markmon % --command "pandoc --mathjax -N -t HTML5" --view "open \"http://localhost:3000\""&<CR>
 "}}}
 
 " NeoBundle"{{{
@@ -432,7 +435,8 @@ let g:quickrun_config = {
             \ 'markdown' : {
             \   'outputter' : 'browser',
             \   'command': 'pandoc',
-            \   'exec': '%c --from=markdown --to=html %o %s %a',
+            \   'cmdopt' : '--mathjax -N',
+            \   'exec': '%c %o --from=markdown --to=HTML5 %s %a',
             \ },
             \ 'python' : {
             \   'command' : 'python2.7',
