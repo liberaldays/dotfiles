@@ -67,10 +67,8 @@ let g:email = 'admin@haccat.com'
 " Difficult Settings"{{{
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-
 set showcmd  " display incomplete commands
 set incsearch " do incremental searching
-
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -90,32 +88,21 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-
-  filetype plugin indent on
-
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
-  au!
+    au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
 
   augroup END
-
-else
-
-  set autoindent " always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -125,9 +112,11 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 end
+
 au BufRead,BufNewFile *.pde set filetype=processing
 au BufRead,BufNewFile *.ino set filetype=arduino
 au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.rmd set filetype=rmd
 "}}}
 
 " Scouter"{{{
@@ -164,7 +153,7 @@ noremap k gk
 inoremap <C-f> <ESC>
 cnoremap <C-f> <ESC>
 lnoremap <C-f> <ESC>
-noremap <Esc><Esc> :nohlsearch<CR>
+noremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Open vimrc
 nnoremap <silent> <Space>. :<C-u>tabedit ~/dotfiles/_vimrc<CR>:<C-u>lcd %:p:h<CR>
@@ -369,8 +358,8 @@ endif
        \ }
  NeoBundle 'Lokaltog/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
- filetype on
  filetype plugin indent on
+ filetype on
  NeoBundleCheck
 
  call neobundle#end()
