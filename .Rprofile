@@ -6,9 +6,8 @@ if(interactive()){
           vimcom.verbose = 1,
           pager = "vimrpager")
   # Use the text based web browser w3m to navigate through R docs:
-  if(Sys.getenv("TMUX") != "")
-    options(browser="~/bin/vimrw3mbrowser",
-            help_type = "html")
+  if(Sys.getenv("TMUX") != "" && Sys.getenv("DISPLAY") == "")
+    options(browser = function(u) system(paste0("tmux new-window 'w3m ", u, "'")))
   # Use either Vim or GVim as text editor for R:
   if(nchar(Sys.getenv("DISPLAY")) > 1)
     options(editor = 'gvim -f -c "set ft=r"')
