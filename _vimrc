@@ -127,7 +127,7 @@ if !exists(":DiffOrig")
 end
 au BufRead,BufNewFile *.pde set filetype=processing
 au BufRead,BufNewFile *.ino set filetype=arduino
-au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md set filetype=rmd
 "}}}
 
 " Scouter"{{{
