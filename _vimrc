@@ -115,7 +115,7 @@ end
 
 au BufRead,BufNewFile *.pde set filetype=processing
 au BufRead,BufNewFile *.ino set filetype=arduino
-au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md set filetype=rmd
 au BufRead,BufNewFile *.rmd set filetype=rmd
 "}}}
 
@@ -820,6 +820,21 @@ let g:tagbar_type_tex = {
 
 
 let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : 'markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+
+let g:tagbar_type_rmd = {
     \ 'ctagstype': 'markdown',
     \ 'ctagsbin' : 'markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes',
