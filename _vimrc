@@ -117,6 +117,7 @@ au BufRead,BufNewFile *.pde set filetype=processing
 au BufRead,BufNewFile *.ino set filetype=arduino
 au BufRead,BufNewFile *.md set filetype=rmd
 au BufRead,BufNewFile *.rmd set filetype=rmd
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 "}}}
 
 " Scouter"{{{
@@ -313,6 +314,25 @@ endif
  NeoBundleLazy 'hynek/vim-python-pep8-indent', {
        \ "autoload": {
        \   "filetypes": ["python", "python3", "djangohtml"],
+       \ }}
+ NeoBundleLazy 'jiangmiao/simple-javascript-indenter', {
+       \ "autoload": {
+       \   "filetypes": ['javescript'],
+       \ }}
+ NeoBundleLazy 'jelera/vim-javascript-syntax', {
+       \ "autoload": {
+       \   "filetypes": ['javescript'],
+       \ }}
+ NeoBundle 'marijnh/tern_for_vim', {
+       \ "autoload": {
+       \   "filetypes": ['javescript'],
+       \ },
+       \ 'build': {
+       \   'others': 'npm install'
+       \}}
+ NeoBundle 'myhere/vim-nodejs-complete', {
+       \ "autoload": {
+       \   "filetypes": ['javescript'],
        \ }}
  NeoBundle 'thinca/vim-ref'
  " NeoBundle 'TwitVim'
@@ -529,7 +549,7 @@ if s:meet_neocomplete_requirements()
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   " Python - jedi
   autocmd FileType python setlocal omnifunc=jedi#completions
@@ -604,6 +624,8 @@ if s:meet_neocomplete_requirements()
   " For perlomni.vim setting.
   " https://github.com/c9s/perlomni.vim
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+  let g:neocomplete#force_omni_input_patterns.javascript = '[^. \t]\.\w*'
+  let g:node_usejscomplete = 1
 endif
 "}}}
 "
@@ -833,6 +855,10 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+let g:tagbar_type_javascript = {
+    \ 'ctagstype': 'javascript',
+    \ 'ctagsbin' : 'jsctags'
+\ }
 "}}}
 
 " vim-latex"{{{
@@ -1013,6 +1039,7 @@ let g:syntastic_enable_r_lint_checker=1
 " let g:syntastic_r_lint_styles = 'list(spacing.indentation.notabs, spacing.indentation.evenindent)'
 let g:syntastic_r_checkers = ['svtools', 'lint']
 let g:syntastic_python_checker = 'flake8'
+let g:syntastic_javascript_checker = "jshint"
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
