@@ -376,6 +376,15 @@ endif
  NeoBundle 'haya14busa/incsearch.vim', {
        \ 'depends' : 'osyo-manga/vital-over',
        \ }
+ NeoBundle 'haya14busa/incsearch-fuzzy.vim', {
+       \ 'depends' : 'haya14busa/incsearch.vim',
+       \ }
+ NeoBundle 'haya14busa/incsearch-migemo.vim', {
+       \ 'depends' : 'haya14busa/incsearch.vim',
+       \ }
+ NeoBundle 'haya14busa/incsearch-easymotion.vim', {
+       \ 'depends' : ['Shougo/unite.vim', 'haya14busa/incsearch.vim' ],
+       \ }
  NeoBundle 'Lokaltog/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
  filetype plugin indent on
@@ -1046,17 +1055,35 @@ let g:syntastic_javascript_checker = "jshint"
 "}}}
 
 " incsearch"{{{
- map /  <Plug>(incsearch-forward)
- map ?  <Plug>(incsearch-backward)
- map g/ <Plug>(incsearch-stay)
- " let g:incsearch#auto_nohlsearch = 1
- " map n  <Plug>(incsearch-nohl-n)
- " map N  <Plug>(incsearch-nohl-N)
- " map *  <Plug>(incsearch-nohl-*)
- " map #  <Plug>(incsearch-nohl-#)
- " map g* <Plug>(incsearch-nohl-g*)
- " map g# <Plug>(incsearch-nohl-g#)
- "}}}
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" let g:incsearch#auto_nohlsearch = 1
+" map n  <Plug>(incsearch-nohl-n)
+" map N  <Plug>(incsearch-nohl-N)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+map z/ <Plug>(incsearch-fuzzyspell-/)
+map z? <Plug>(incsearch-fuzzyspell-?)
+map zg/ <Plug>(incsearch-fuzzyspell-stay)
+map m/ <Plug>(incsearch-migemo-/)
+map m? <Plug>(incsearch-migemo-?)
+map mg/ <Plug>(incsearch-migemo-stay)
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzy#converter()],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+"}}}
 
 " easymotion"{{{
 let g:EasyMotion_do_mapping = 0 "Disable default mappings
