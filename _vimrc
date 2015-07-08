@@ -379,13 +379,18 @@ endif
  NeoBundle 'haya14busa/incsearch-fuzzy.vim', {
        \ 'depends' : 'haya14busa/incsearch.vim',
        \ }
+ NeoBundle 'haya14busa/vim-migemo', " {
+ "      \ "build": {
+ "      \   "mac": "brew install cmigemo",
+ "      \   "unix": "pip install jedi",
+ "      \ }}
  NeoBundle 'haya14busa/incsearch-migemo.vim', {
        \ 'depends' : 'haya14busa/incsearch.vim',
        \ }
  NeoBundle 'haya14busa/incsearch-easymotion.vim', {
        \ 'depends' : ['Shougo/unite.vim', 'haya14busa/incsearch.vim' ],
        \ }
- NeoBundle 'Lokaltog/vim-easymotion'
+ NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
  filetype plugin indent on
  filetype on
@@ -1100,6 +1105,7 @@ omap z <Plug>(easymotion-s2)
 " Jump to first match with enter & space
 let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_use_migemo = 1
 " =======================================
 " Search Motions
 " =======================================
