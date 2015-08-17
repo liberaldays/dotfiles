@@ -356,6 +356,10 @@ endif
  NeoBundle 'xolox/vim-misc'
  NeoBundle 'pentie/VimRepress'
  NeoBundle 'tpope/vim-markdown'
+ NeoBundleLazy 'jszakmeister/markdown2ctags', {
+       \ "autoload": {
+       \   "filetypes": ["rmd","markdown"],
+       \ }}
  NeoBundle 'kannokanno/previm'
  NeoBundle 'tyru/open-browser.vim'
  " Editing Text 3 Gods Arms
@@ -794,7 +798,7 @@ let g:tagbar_type_r = {
 
 let g:tagbar_type_rmd = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : 'markdown2ctags.py',
+    \ 'ctagsbin' : '~/.vim/bundle/markdown2ctags/markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes',
     \ 'kinds' : [
         \ 's:sections',
@@ -863,7 +867,7 @@ let g:tagbar_type_tex = {
 
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : 'markdown2ctags.py',
+    \ 'ctagsbin' : '~/.vim/bundle/markdown2ctags/markdown2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes',
     \ 'kinds' : [
         \ 's:sections',
