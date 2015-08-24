@@ -373,6 +373,13 @@ endif
  NeoBundle 'deton/jasegment.vim'
  NeoBundle 'rizzatti/dash.vim'
  NeoBundle 'osyo-manga/vim-precious'
+ NeoBundle 'elzr/vim-json'
+ NeoBundleLazy '5t111111/neat-json.vim', {
+       \ "autoload": {
+       \   "filetypes": ["json"],
+       \ },
+       \ 'depends' : 'elzr/vim-json',
+       \ }
  NeoBundleLazy 'scrooloose/syntastic', {
        \ "autoload": {
        \   "filetypes": ["c","r","php","go","ruby", "python"],
@@ -1140,4 +1147,12 @@ let g:templates_directory = ['~/.vim/templates/']
 let g:templates_no_builtin_templates = 1
 let g:templates_name_prefix = 'template.'
 let g:templates_global_name_prefix = 'template.'
+"}}}
+
+" JSONFORMAT"{{{
+command! JsonFormat :execute '%!python -m json.tool'
+  \ | :execute '%!python -c "import re,sys;chr=__builtins__.__dict__.get(\"unichr\", chr);sys.stdout.write(re.sub(r\"\\u[0-9a-f]{4}\", lambda x: chr(int(\"0x\" + x.group(0)[2:], 16)), sys.stdin.read()))"'
+  \ | :%s/ \+$//ge
+  \ | :set ft=javascript
+  \ | :1
 "}}}
