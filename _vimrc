@@ -1026,7 +1026,7 @@ function! VimuxSlime()
 endfunction
 " orientation of the split tmux pane
 let g:VimuxOrientation = "h"
-let g:VimuxWidth = "80"
+let g:VimuxHeight = "40"
 " Vimux Prompt String
 let g:VimuxPromptString = "cmd:""}}}
 
