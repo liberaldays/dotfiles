@@ -893,12 +893,12 @@ let g:tagbar_type_javascript = {
 " vim-latex"{{{
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
-let g:Tex_CompileRule_dvi = '/opt/local/bin/platex --interaction=nonstopmode $*'
-let g:Tex_CompileRule_pdf = '/opt/local/bin/dvipdfmx $*.dvi'
+let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
-let g:Tex_BibtexFlavor = '/opt/local/bin/pbibtex'
-let g:Tex_MakeIndexFlavor = '/opt/local/bin/mendex $*.idx'
+let g:Tex_BibtexFlavor = 'pbibtex'
+let g:Tex_MakeIndexFlavor = 'mendex $*.idx'
 let g:Tex_UseEditorSettingInDVIViewer = 1
 let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
 let g:Tex_ViewRule_ps = '/usr/bin/open'
