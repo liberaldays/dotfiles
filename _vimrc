@@ -251,7 +251,7 @@ endif
        \ }}
  NeoBundle 'sjl/gundo.vim'
  NeoBundle 'Rip-Rip/clang_complete'
- NeoBundle 'Shougo/vimproc', { 'build' : {
+ NeoBundle 'Shougo/vimproc.vim', { 'build' : {
        \  'cygwin' : 'make -f make_cygwin.mak',
        \  'mac'  : 'make -f make_mac.mak',
        \  'unix' : 'make -f make_unix.mak',
@@ -403,11 +403,9 @@ endif
        \ }
  NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
- filetype plugin indent on
- filetype on
- NeoBundleCheck
-
  call neobundle#end()
+ filetype plugin indent on
+ NeoBundleCheck
  "}}}
 
 " Settings of VimShell"{{{
