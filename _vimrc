@@ -345,7 +345,7 @@ endif
        \ "autoload": {
        \  "filetypes": ["processing"],
        \ }}
- NeoBundleLazy 'git://git.code.sf.net/p/vim-latex/vim-latex', {
+ NeoBundleLazy 'vim-latex/vim-latex', {
        \ "autoload": {
        \   "filetypes": ["tex"],
        \ }}
