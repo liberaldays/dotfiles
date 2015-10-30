@@ -226,11 +226,12 @@ endif
  " Unite 周り
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'Shougo/neomru.vim'
+ NeoBundle 'Shougo/neoyank.vim'
  NeoBundle 'zhaocai/unite-scriptnames'
- NeoBundle 'h1mesuke/unite-outline'
+ NeoBundle 'Shougo/unite-outline'
  NeoBundle 'tsukkee/unite-tag'
  NeoBundle 'osyo-manga/unite-fold'
- NeoBundle 'tsukkee/unite-help'
+ NeoBundle 'Shougo/unite-help'
  NeoBundle 'choplin/unite-spotlight'
  NeoBundle 'kannokanno/unite-todo'
  NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
