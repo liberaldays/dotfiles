@@ -135,8 +135,13 @@ if which-s sysctl; then
 
   fi
 
-  alias ls="ls -G"
-  alias sl="ls -laG"
+  if test `uname` = Linux; then
+    alias ls="ls --color=always"
+    alias sl="ls --color=always -la"
+  else
+    alias ls="ls -G"
+    alias sl="ls -laG"
+  fi
 
 else
 
