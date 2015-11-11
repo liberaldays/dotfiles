@@ -105,7 +105,7 @@ if which-s sysctl; then
     export TERM=screen-256color
 
     precmd () {
-      PROMPT=$'%{\e[1;31m%}%m%{\e[5;34m%}:%{\e[0;4;36m%}%n%{\e[m%} %{\e[0;33m%}('$(sysctl -n vm.loadavg | perl -anpe '$_=$F[1]')$') %{\e[1;35m%}<-%{\e[m%} '
+      PROMPT=$'%{\e[1;31m%}%m%{\e[5;34m%}:%{\e[0;4;36m%}%n%{\e[m%} %{\e[0;33m%}('$(uptime | awk '{print $(NF-2)}' | sed 's/,//g')$') %{\e[1;35m%}<-%{\e[m%} '
     }
     RPROMPT=$'%{\e[32m%}%/%{\e[m%}'
 
@@ -115,7 +115,7 @@ if which-s sysctl; then
       0)
         # ROOT権限ユーザの場合
         precmd () {
-          PROMPT=$'%{\e[1;31m%}%m%{\e[5;34m%}:%{\e[0;4;36m%}%n%{\e[m%} %{\e[0;33m%}('$(sysctl -n vm.loadavg | perl -anpe '$_=$F[1]')$') %{\e[1;35m%}<-%{\e[m%} '
+          PROMPT=$'%{\e[1;31m%}%m%{\e[5;34m%}:%{\e[0;4;36m%}%n%{\e[m%} %{\e[0;33m%}('$(uptime | awk '{print $(NF-2)}' | sed 's/,//g')$') %{\e[1;35m%}<-%{\e[m%} '
         }
         RPROMPT=$'%{\e[32m%}%/%{\e[m%}'
         ;;
@@ -123,7 +123,7 @@ if which-s sysctl; then
         # ROOTでなく，かつSSH接続をしていない場合
         precmd () {
           # PROMPT=$'%{\e[0;33m%}%* ('$(sysctl -n vm.loadavg | perl -anpe '$_=$F[1]')$') %%%{\e[m%} '
-          PROMPT=$'%{\e[0;32m%}%m%{\e[1;5;34m%}:%{\e[0;36m%}%n %{\e[0;33m%}('$(sysctl -n vm.loadavg | perl -anpe '$_=$F[1]')$') %{\e[1;35m%}<-%{\e[m%} '
+          PROMPT=$'%{\e[0;32m%}%m%{\e[1;5;34m%}:%{\e[0;36m%}%n %{\e[0;33m%}('$(uptime | awk '{print $(NF-2)}' | sed 's/,//g')$') %{\e[1;35m%}<-%{\e[m%} '
         }
         RPROMPT=$'%{\e[32m%}%/%{\e[m%}'
         ;;
