@@ -97,6 +97,10 @@ setopt correct
 #}}}
 
 # 環境別条件分岐設定#{{{
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
 which-s() { whence -p ${1+"$1"} >/dev/null; }
 if which-s sysctl; then
 
@@ -132,7 +136,7 @@ if which-s sysctl; then
   fi
 
   alias ls="ls -G"
-  alias sl="ls -lawG"
+  alias sl="ls -laG"
 
 else
 
