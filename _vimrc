@@ -404,6 +404,7 @@ endif
        \ }
  NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
+ NeoBundle 'kien/rainbow_parenthesies.vim'
  call neobundle#end()
  filetype plugin indent on
  NeoBundleCheck
@@ -1154,4 +1155,14 @@ command! JsonFormat :execute '%!python -m json.tool'
   \ | :%s/ \+$//ge
   \ | :set ft=javascript
   \ | :1
+"}}}
+
+" rainbow parentheses"{{{
+let g:rebpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 "}}}
