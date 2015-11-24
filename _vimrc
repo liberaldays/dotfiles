@@ -404,7 +404,7 @@ endif
        \ }
  NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
- NeoBundle 'kien/rainbow_parenthesies.vim'
+ NeoBundle 'kien/rainbow_parentheses.vim'
  call neobundle#end()
  filetype plugin indent on
  NeoBundleCheck
