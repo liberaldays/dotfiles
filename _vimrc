@@ -450,8 +450,9 @@ let g:quickrun_config = {
             \ 'tex' : {
             \   'command' : 'latexmk',
             \   'outputter' : 'error',
+            \   'cmdopt' : '-gg',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c %s']
+            \   'exec': ['%c %o']
             \ },
             \ 'tex/lualatex' : {
             \   'command' : 'latexmk',
