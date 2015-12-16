@@ -659,7 +659,7 @@ endif
 " neosnippet "{{{
 " <C-J> にマッピング. スニペット補完
 " Plugin key-mappings.
-imap <C-J> <Plug>(neosnippet_expand_or_jump)
+" imap <C-J> <Plug>(neosnippet_expand_or_jump)
 smap <C-J> <Plug>(neosnippet_expand_or_jump)
 xmap <C-J> <Plug>(neosnippet_expand_target)
 "" SuperTab like snippets behavior.
@@ -1173,6 +1173,6 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:skk_jisyo = '~/Library/Application Support/AquaSKK/skk-jisyo.utf8'
 let g:skk_auto_save_jisyo = 1
 let g:skk_keep_state = 1
-let g:skk_kutouten_type = en
+let g:skk_kutouten_type = 'en'
 let g:skk_use_color_cursor = 1
 "}}}
