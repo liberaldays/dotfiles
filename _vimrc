@@ -404,6 +404,8 @@ endif
        \ }
  NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
+ NeoBundle 'kien/rainbow_parentheses.vim'
+ NeoBundle 'tyru/skk.vim'
  call neobundle#end()
  filetype plugin indent on
  NeoBundleCheck
@@ -449,8 +451,9 @@ let g:quickrun_config = {
             \ 'tex' : {
             \   'command' : 'latexmk',
             \   'outputter' : 'error',
+            \   'cmdopt' : '-gg',
             \   'outputter/error/error' : 'quickfix',
-            \   'exec': ['%c %s']
+            \   'exec': ['%c %o']
             \ },
             \ 'tex/lualatex' : {
             \   'command' : 'latexmk',
@@ -656,7 +659,7 @@ endif
 " neosnippet "{{{
 " <C-J> にマッピング. スニペット補完
 " Plugin key-mappings.
-imap <C-J> <Plug>(neosnippet_expand_or_jump)
+" imap <C-J> <Plug>(neosnippet_expand_or_jump)
 smap <C-J> <Plug>(neosnippet_expand_or_jump)
 xmap <C-J> <Plug>(neosnippet_expand_target)
 "" SuperTab like snippets behavior.
@@ -1156,5 +1159,28 @@ command! JsonFormat :execute '%!python -m json.tool'
   \ | :1
 "}}}
 
+" rainbow parentheses"{{{
+let g:rebpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"}}}
+
+" SKK"{{{
+let g:skk_jisyo = "~/Library/Application\ Support/AquaSKK/skk-jisyo.utf8"
+let g:skk_large_jisyo = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
+" let g:skk_control_j_key = ''
+imap "" <Plug>(skk-toggle-im)
+let g:skk_auto_save_jisyo = 1
+let g:skk_keep_state = 1
+let g:skk_kutouten_type = 'en'
+let g:skk_use_color_cursor = 1
+"}}}
+
+" molokai set"{{{
 colorscheme molokai
 set bg=dark
+"}}}
