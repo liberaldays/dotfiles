@@ -495,15 +495,6 @@ nmap <expr><Leader>lr quickrun#run('tex/lualatex')
 set splitright
 "}}}
 
-" " powerline - settings"{{{
-" " font
-" " フォントサイズ
-" set guifont=Ricty_for_Powerline:h10
-" " こっちは日本語フォント
-" set guifontwide=Ricty:h10
-" " " `fancy' テーマに切り替え
-" let g:Powerline_symbols = 'fancy'"}}}
-
 " NEOCOMPLETE"{{{
 if s:meet_neocomplete_requirements()
   " Disable AutoComplPop.
@@ -741,7 +732,7 @@ endfunction"}}}
 " colorscheme Settings"{{{
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-let g:solarized_degrade=0
+let g:solarized_degrade=1
 let g:solarized_bold=1
 let g:solarized_underline=1
 let g:solarized_italic=1
@@ -1178,9 +1169,4 @@ let g:skk_auto_save_jisyo = 1
 let g:skk_keep_state = 1
 let g:skk_kutouten_type = 'en'
 let g:skk_use_color_cursor = 1
-"}}}
-
-" molokai set"{{{
-colorscheme molokai
-set bg=dark
 "}}}
