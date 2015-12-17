@@ -191,6 +191,10 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 #}}}
 
 # Start tmux on every shell login#{{{
+# powerline
+export PATH=$PATH:~/Library/Python/2.7/bin
+powerline-daemon -q
+. ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 #https://wiki.archlinux.org/index.php/Tmux#Start_tmux_on_every_shell_login
 if which tmux 2>&1 >/dev/null; then
   #if not inside a tmux session, and if no session is started, start a new session

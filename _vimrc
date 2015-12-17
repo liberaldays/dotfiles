@@ -1155,3 +1155,6 @@ command! JsonFormat :execute '%!python -m json.tool'
   \ | :set ft=javascript
   \ | :1
 "}}}
+
+colorscheme molokai
+set bg=dark

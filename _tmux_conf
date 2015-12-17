@@ -7,12 +7,6 @@ if "test -n '$SSH_CONNECTION'" "bind-key C-s send-prefix"
 set-option -g history-limit 8000
 set-option -g default-shell $SHELL
 set-option -g terminal-overrides 'xterm*:smcup@:rmcup@'
-set-option -gw mode-mouse on
-set-option -g mouse-utf8 on
-set-option -g mouse-resize-pane on
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-option -g mouse on
 set -s escape-time 0
 set-window-option -g utf8 on # 日本語環境なら今のところ必須。
 set-window-option -g mode-keys vi # コピーモードのキーマップ。標準はemacs
@@ -32,14 +26,16 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 ## tmux-prompt# {{{
 # tmux-powerline
-set-option -g status on
-set-option -g status-interval 2
-set-option -g status-utf8 on
-# set-option -g status-justify "centre"
-set-option -g status-left-length 80
-set-option -g status-right-length 120
-set-option -g status-left "#(~/dotfiles/tmux-powerline/status-left.sh)#[bg=red]#[fg=black]⮀#[bg=red]#[fg=white] mem #(used-mem)%% #[bg=black]#[fg=red]⮀"
-set-option -g status-right "#(~/dotfiles/tmux-powerline/status-right.sh)"
+run-shell "powerline-daemon -q"
+source "/Users/haco/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf"
+# set-option -g status on
+# set-option -g status-interval 2
+# set-option -g status-utf8 on
+# # set-option -g status-justify "centre"
+# set-option -g status-left-length 80
+# set-option -g status-right-length 120
+# set-option -g status-left "#(~/dotfiles/tmux-powerline/status-left.sh)#[bg=red]#[fg=black]⮀#[bg=red]#[fg=white] mem #(used-mem)%% #[bg=black]#[fg=red]⮀"
+# set-option -g status-right "#(~/dotfiles/tmux-powerline/status-right.sh)"
 
 # 文字色と背景色
 set -g status-fg white
@@ -52,3 +48,9 @@ set-option -g default-terminal "screen-256color"
 # P-rで再起動
 bind r source-file ~/.tmux.conf\; display-message "Reload Config!!"
 
+# set-option -gw mode-mouse on
+# set-option -g mouse-utf8 on
+# set-option -g mouse-resize-pane on
+# set-option -g mouse-select-pane on
+# set-option -g mouse-select-window on
+set-option -g mouse on
