@@ -1,3 +1,11 @@
+setl tabstop=4
+setl softtabstop=4
+setl shiftwidth=4
+setl smarttab
+setl expandtab
+setl autoindent
+setl smartindent
+setl cindent
 
 " Vim-R-plugin
 let vimrplugin_vsplit = 1

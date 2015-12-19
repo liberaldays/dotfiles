@@ -57,7 +57,7 @@
 			},
       {
         "function": "powerline.segments.common.net.hostname",
-        "priority": "20",
+        "priority": 20,
         "args": {
           "exclude_domain": "True"
         }
