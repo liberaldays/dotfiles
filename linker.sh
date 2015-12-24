@@ -9,3 +9,4 @@ ln -si ~/dotfiles/.Rprofile ~/.Rprofile
 ln -si ~/dotfiles/.latexmkrc ~/.latexmkrc
 ln -si ~/dotfiles/.gitignore_global ~/.gitignore_global
 ln -si ~/dotfiles/.config ~/.config
+ln -si ~/dotfiles/.gvimrc ~/.gvimrc
