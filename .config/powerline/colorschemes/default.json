@@ -47,6 +47,9 @@
 		"cwd:current_folder":        "information:regular",
 		"cwd:divider":               { "fg": "gray7", "bg": "gray4", "attrs": [] },
 		"virtualenv":                { "fg": "white", "bg": "darkcyan", "attrs": [] },
-		"attached_clients":          { "fg": "gray8", "bg": "gray0", "attrs": [] }
+		"attached_clients":          { "fg": "gray8", "bg": "gray0", "attrs": [] },
+    "mem_usage":                 { "fg": "gray8", "bg": "gray0", "attr": [] },
+    "mem_usage_percent":                 { "fg": "gray8", "bg": "gray0", "attr": [] },
+    "mem_usage_gradient":        { "fg": "green_yellow_orange_red", "bg": "gray0", "attr": [] }
 	}
 }
