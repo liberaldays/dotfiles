@@ -1,16 +1,30 @@
 {
 	"segments": {
-		"right": [
+    "left": [
       {
-          "function": "powerlinemem.mem_usage.mem_usage_percent",
-          "priority": 50,
-          "args": {
-            "format": "Mem:%d%%"
-          }
-      },
+            "function": "powerlinemem.mem_usage.mem_usage_percent"
+      }
+    ],
+		"right": [
+			{
+				"function": "powerline.segments.common.net.network_load",
+				"priority": 30
+			},
 			{
 				"function": "powerline.segments.common.sys.system_load",
 				"priority": 30
+			},
+			{
+				"function": "powerline.segments.common.bat.battery",
+        "name": "battery",
+        "priority": 50,
+        "args": {
+          "gamify": "True",
+          "full_heart": "♥",
+          "empty_heart": "♡",
+          "online": "⚡︎",
+          "offline": " "
+        }
 			},
 			{
 				"function": "powerline.segments.common.wthr.weather",
