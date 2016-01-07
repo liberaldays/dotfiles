@@ -405,7 +405,7 @@ endif
  NeoBundle 'easymotion/vim-easymotion'
  NeoBundle 'ujihisa/neco-look'
  NeoBundle 'kien/rainbow_parentheses.vim'
- NeoBundle 'tyru/skk.vim'
+ " NeoBundle 'tyru/skk.vim'
  call neobundle#end()
  filetype plugin indent on
  NeoBundleCheck
@@ -1161,12 +1161,12 @@ au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " SKK"{{{
-let g:skk_jisyo = '~/Library/Application\ Support/AquaSKK/skk-jisyo.utf8'
-let g:skk_large_jisyo = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
-" let g:skk_control_j_key = ''
-imap "" <Plug>(skk-toggle-im)
-let g:skk_auto_save_jisyo = 1
-let g:skk_keep_state = 1
-let g:skk_kutouten_type = 'en'
-let g:skk_use_color_cursor = 1
+" let g:skk_jisyo = '~/Library/Application\ Support/AquaSKK/skk-jisyo.utf8'
+" let g:skk_large_jisyo = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
+" " let g:skk_control_j_key = ''
+" imap "" <Plug>(skk-toggle-im)
+" let g:skk_auto_save_jisyo = 1
+" let g:skk_keep_state = 1
+" let g:skk_kutouten_type = 'en'
+" let g:skk_use_color_cursor = 1
 "}}}
