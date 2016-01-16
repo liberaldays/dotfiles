@@ -1160,7 +1160,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
-" " SKK"{{{
+" SKK"{{{
 " let g:skk_jisyo = '~/Library/Application\ Support/AquaSKK/skk-jisyo.utf8'
 " let g:skk_large_jisyo = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
 " " let g:skk_control_j_key = ''
