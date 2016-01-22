@@ -20,3 +20,6 @@ colorscheme solarized
 let g:solarized_termtrans=0
 let g:solarized_degrade=0
 let g:solarized_menu=0
+
+let g:tex_conceal='adsmg'
+set conceallevel=0
