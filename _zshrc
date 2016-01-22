@@ -170,7 +170,7 @@ setopt correct
 #}}}
 
 # PATH設定#{{{
-export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/usr/local/lib/python2.7/site-packages:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/TeX/texbin:/usr/local/bin:~/bin:$PATH
+export PATH=/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin:/usr/local/lib/python2.7/site-packages:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/TeX/texbin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 export MANPATH=$MANPATH:/opt/local/share/man:/usr/share/man
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/mysql/lib
 #}}}
@@ -205,6 +205,7 @@ fi
 # エイリアス# {{{
 alias tmux="tmux -2"
 alias vim='vim --servername VIM'
+alias gvi='open -a MacVim'
 alias ta="tmux attach"
 #alias ipython="ipython-2.7"
 alias vp='vim -c "call VimpressSetting()"'
