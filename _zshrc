@@ -180,6 +180,14 @@ export WORKON_HOME=$HOME/.virtualenvs
 if which-s virtualenvwrapper.sh; then
   source `which virtualenvwrapper.sh`
 fi
+
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+    else
+        /usr/local/bin/python "$@"
+    fi
+}
 # }}}
 
 # 色適用#{{{
@@ -209,6 +217,7 @@ alias gvi='open -a MacVim'
 alias ta="tmux attach"
 #alias ipython="ipython-2.7"
 alias vp='vim -c "call VimpressSetting()"'
+alias wttr='curl -4 wttr.in/tokyo'
 # }}}
 
 # 外部プラグイン読み込み# {{{
