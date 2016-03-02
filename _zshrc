@@ -218,6 +218,7 @@ alias ta="tmux attach"
 #alias ipython="ipython-2.7"
 alias vp='vim -c "call VimpressSetting()"'
 alias wttr='curl -4 wttr.in/tokyo'
+alias ipy='frameworkpython -m IPython'
 # }}}
 
 # 外部プラグイン読み込み# {{{
