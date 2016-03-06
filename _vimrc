@@ -701,8 +701,8 @@ noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
 " スニペット
 imap <C-k><C-i> <Plug>(neosnippet_start_unite_snippet)
 " todo
-noremap <C-k><C-t> :<C-u>Unite todo<CR>
-let g:unite_todo_note_suffix="md"
+noremap <C-k><C-t> :<C-u>Unite tweetvim<CR>
+" let g:unite_todo_note_suffix="md"
 " Spotlight
 noremap <C-k><C-p> :<C-u>Unite spotlight<CR>
 " Outline
