@@ -39,10 +39,6 @@ autocmd InsertLeave * set nopaste
 " highlight CursorColumn ctermbg=Blue
 " highlight CursorColumn ctermfg=Green
 
-" filetype off
-" filetype plugin indent off
-filetype plugin indent on
-"
 " XXX Undo Tree
 if has('persistent_undo')
     set undodir=./.vimundo,~/.vimundo
@@ -120,20 +116,6 @@ au BufRead,BufNewFile *.rmd set filetype=rmd
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 "}}}
 
-" Scouter"{{{
-function! Scouter(file, ...)
-  let pat = '^\s*$\|^\s*"'
-  let lines = readfile(a:file)
-  if !a:0 || !a:1
-    let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
-  endif
-  return len(filter(lines,'v:val !~ pat'))
-endfunction
-command! -bar -bang -nargs=? -complete=file Scouter
-\        echo Scouter(empty(<q-args>) ? $MYVIMRC : expand(<q-args>), <bang>0)
-command! -bar -bang -nargs=? -complete=file GScouter
-\        echo Scouter(empty(<q-args>) ? $MYGVIMRC : expand(<q-args>), <bang>0)
-
 " :e などでファイルを開く際にフォルダが存在しない場合は自動作成
 function! s:mkdir(dir, force)
   if !isdirectory(a:dir) && (a:force ||
@@ -195,256 +177,45 @@ nnoremap tu :GundoToggle<CR>
 noremap <silent> gm :!markmon % --command "pandoc --mathjax -N -t HTML5" --view "open \"http://localhost:3000\""&<CR>
 "}}}
 
-" NeoBundle"{{{
-filetype off
- if has('vim_starting')
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
-   call neobundle#begin(expand('~/.vim/bundle/'))
- endif
+"dein Scripts----------------------------- "{{{
+" Required:
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.vim/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
- " NeoBundle本体
- NeoBundleFetch 'Shougo/neobundle.vim'
- " 利用中のプラグインをNeoBundle
- NeoBundle 'ervandew/screen'
- " For NeoComplete or NeoComplcache
-function! s:meet_neocomplete_requirements()
-  return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-endfunction
-if s:meet_neocomplete_requirements()
-    NeoBundle 'Shougo/neocomplete.vim'
-    NeoBundleFetch 'Shougo/neocomplcache.vim'
-else
-    NeoBundleFetch 'Shougo/neocomplete.vim'
-    NeoBundle 'Shougo/neocomplcache.vim'
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
- " NeoBundle 'honza/vim-snippets'
- NeoBundleLazy 'Shougo/neosnippet', {
-       \ 'depends': ["Shougo/neosnippet-snippets","Shougo/context_filetype.vim"],
-       \ "autoload": {
-       \    "insert": 1,
-       \ }}
- " Unite 周り
- NeoBundle 'Shougo/unite.vim'
- NeoBundle 'Shougo/neomru.vim'
- NeoBundle 'Shougo/neoyank.vim'
- NeoBundle 'zhaocai/unite-scriptnames'
- NeoBundle 'Shougo/unite-outline'
- NeoBundle 'tsukkee/unite-tag'
- NeoBundle 'osyo-manga/unite-fold'
- NeoBundle 'Shougo/unite-help'
- NeoBundle 'choplin/unite-spotlight'
- NeoBundle 'kannokanno/unite-todo'
- NeoBundleLazy 'yomi322/unite-tweetvim' " unite source for tweetvim
- NeoBundle 'ujihisa/unite-colorscheme'
- NeoBundle 'kana/vim-vspec'
- NeoBundle 'basyura/TweetVim' " twitter client for vim
- NeoBundleLazy 'mattn/webapi-vim'
- NeoBundleLazy 'basyura/twibill.vim'
- NeoBundleLazy 'basyura/bitly.vim'
- NeoBundleLazy 'osyo-manga/TweetVim-powerline-theme'
- NeoBundle 'Shougo/vimshell'
- NeoBundleLazy "Shougo/vimfiler", {
-       \ "depends": ["Shougo/unite.vim"],
-       \ "autoload": {
-       \   "commands": ["VimFilerTab", "VimFiler", "VimFilerExplorer"],
-       \   "mappings": ['<Plug>(vimfiler_switch)'],
-       \   "explorer": 1,
-       \ }}
- NeoBundle 'sjl/gundo.vim'
- NeoBundle 'Rip-Rip/clang_complete'
- NeoBundle 'Shougo/vimproc.vim', { 'build' : {
-       \  'cygwin' : 'make -f make_cygwin.mak',
-       \  'mac'  : 'make -f make_mac.mak',
-       \  'unix' : 'make -f make_unix.mak',
-       \   },
-       \ }
- NeoBundle 'altercation/vim-colors-solarized'
- NeoBundle 'tomasr/molokai'
- NeoBundle 'tyru/restart.vim'
- " NeoBundle 'tyru/caw.vim'
- NeoBundle 'thinca/vim-quickrun'
- " Python 周り
- NeoBundleLazy 'lambdalisue/vim-django-support'
- NeoBundle 'reinh/vim-makegreen'
- NeoBundle 'lambdalisue/nose.vim'
- NeoBundleLazy 'alfredodeza/pytest.vim', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
-"  NeoBundle 'sontek/rope-vim'
- NeoBundleLazy "davidhalter/jedi-vim", {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ },
-       \ "build": {
-       \   "mac": "pip install jedi",
-       \   "unix": "pip install jedi",
-       \ }}
- ", { 'rev' : '211cbf1fb7'}
- NeoBundleLazy 'jmcantrell/vim-virtualenv', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- NeoBundle 'benmills/vimux'
- " NeoBundle 'ivanov/vim-ipython'
- NeoBundleLazy 'nvie/vim-flake8', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- NeoBundleLazy 'mitechie/pyflakes-pathogen', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- NeoBundleLazy 'tell-k/vim-autopep8', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ },
-       \ "build": {
-       \   "mac": "pip install jedi",
-       \   "unix": "pip install jedi",
-       \ }}
- NeoBundleLazy 'hdima/python-syntax', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- " NeoBundle 'nathanaelkane/vim-indent-guides'
- NeoBundleLazy 'Yggdroot/indentLine', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- NeoBundleLazy 'hynek/vim-python-pep8-indent', {
-       \ "autoload": {
-       \   "filetypes": ["python", "python3", "djangohtml"],
-       \ }}
- NeoBundleLazy 'jiangmiao/simple-javascript-indenter', {
-       \ "autoload": {
-       \   "filetypes": ['javescript'],
-       \ }}
- NeoBundleLazy 'jelera/vim-javascript-syntax', {
-       \ "autoload": {
-       \   "filetypes": ['javescript'],
-       \ }}
- NeoBundle 'marijnh/tern_for_vim', {
-       \ "autoload": {
-       \   "filetypes": ['javescript'],
-       \ },
-       \ 'build': {
-       \   'others': 'npm install'
-       \}}
- NeoBundle 'myhere/vim-nodejs-complete', {
-       \ "autoload": {
-       \   "filetypes": ['javescript'],
-       \ }}
- NeoBundle 'thinca/vim-ref'
- " NeoBundle 'TwitVim'
- NeoBundle 'jalvesaq/R-Vim-runtime'
- NeoBundle 'jcfaria/Vim-R-plugin'
- " NeoBundle 'vim-scripts/Vim-R-plugin'
- NeoBundle 'itchyny/lightline.vim'
- NeoBundle 'majutsushi/tagbar'
- NeoBundleLazy 'sophacles/vim-processing', {
-       \ "autoload": {
-       \  "filetypes": ["processing"],
-       \ }}
- NeoBundleLazy 'vim-latex/vim-latex', {
-       \ "autoload": {
-       \   "filetypes": ["tex"],
-       \ }}
- NeoBundle 'vim-scripts/R-syntax-highlighting'
- NeoBundle 'LeafCage/foldCC'
- NeoBundle 'tpope/vim-fugitive'
- NeoBundle 'xolox/vim-reload'
- NeoBundle 'xolox/vim-misc'
- NeoBundle 'pentie/VimRepress'
- NeoBundle 'tpope/vim-markdown'
- NeoBundleLazy 'jszakmeister/markdown2ctags', {
-       \ "autoload": {
-       \   "filetypes": ["rmd","markdown"],
-       \ }}
- NeoBundle 'kannokanno/previm'
- NeoBundle 'tyru/open-browser.vim'
- " Editing Text 3 Gods Arms
- NeoBundle 'tpope/vim-surround'
- NeoBundle 'vim-scripts/Align'
- " NeoBundle 'vim-scripts/YankRing.vim'
- NeoBundle 'aperezdc/vim-template'
- NeoBundle 'xolox/vim-session', {
-       \ 'depends' : 'xolox/vim-misc',
-       \ }
- NeoBundle 'deton/jasegment.vim'
- NeoBundle 'rizzatti/dash.vim'
- NeoBundle 'osyo-manga/vim-precious'
- NeoBundle 'elzr/vim-json'
- NeoBundleLazy '5t111111/neat-json.vim', {
-       \ "autoload": {
-       \   "filetypes": ["json"],
-       \ },
-       \ 'depends' : 'elzr/vim-json',
-       \ }
- NeoBundleLazy 'scrooloose/syntastic', {
-       \ "autoload": {
-       \   "filetypes": ["c","r","php","go","ruby", "python"],
-       \ }}
- NeoBundle 'haya14busa/incsearch.vim', {
-       \ 'depends' : 'osyo-manga/vital-over',
-       \ }
- NeoBundle 'haya14busa/incsearch-fuzzy.vim', {
-       \ 'depends' : 'haya14busa/incsearch.vim',
-       \ }
- NeoBundle 'haya14busa/vim-migemo', " {
- "      \ "build": {
- "      \   "mac": "brew install cmigemo",
- "      \   "unix": "pip install jedi",
- "      \ }}
- NeoBundle 'haya14busa/incsearch-migemo.vim', {
-       \ 'depends' : 'haya14busa/incsearch.vim',
-       \ }
- NeoBundle 'haya14busa/incsearch-easymotion.vim', {
-       \ 'depends' : ['Shougo/unite.vim', 'haya14busa/incsearch.vim' ],
-       \ }
- NeoBundle 'easymotion/vim-easymotion'
- NeoBundle 'ujihisa/neco-look'
- NeoBundle 'kien/rainbow_parentheses.vim'
- " NeoBundle 'tyru/skk.vim'
- call neobundle#end()
- filetype plugin indent on
- NeoBundleCheck
+
+let g:dein#install_progress_type = 'title'
+let g:dein#install_message_type = 'none'
+let g:dein#enable_notification = 1
+
+" Required:
+if dein#load_state(s:dein_dir)
+  call dein#begin(expand(s:dein_dir))
+  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/.vim/deinlazy.toml', {'lazy' : 1})
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
  "}}}
-
-" Settings of VimShell"{{{
-" \is: シェルを起動
- nnoremap <silent> \is :VimShell<CR>
- nnoremap <silent> \isp :VimShellPop<CR>
- " \ipy: ipythonを非同期で起動
- nnoremap <silent> \ip :VimShellInteractive ipython-2.7 console<CR>
-" \irb: irbを非同期で起動
- nnoremap <silent> \irb :VimShellInteractive irb<CR>
-" \irr: Rを非同期で起動
- nnoremap <silent> \irr :VimShellInteractive r<CR>
- " 選択中に\ss: 非同期で開いたインタプリタに選択行を評価させる
- vnoremap \ss :VimShellSendString<CR>
- " \ss: 非同期で開いたインタプリタに現在の行を評価させる
- nnoremap <silent> \ss <S-v>:VimShellSendString<CR>"}}}
-
- " VimFiler Settings"{{{
-nnoremap <Leader>e :VimFilerExplorer<CR>
-" close vimfiler automatically when there are only vimfiler open
-autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
-let s:hooks = neobundle#get_hooks("vimfiler")
-function! s:hooks.on_source(bundle)
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_enable_auto_cd = 1
-endfunction
-unlet s:hooks
-" Edit file by tabedit.
-let g:vimfiler_edit_action = 'tabopen'
-" Like Textmate icons.
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-"}}}
 
 " quickrun.vim{{{
 let g:quickrun_config = {
@@ -495,158 +266,6 @@ nmap <expr><Leader>lr quickrun#run('tex/lualatex')
 set splitright
 "}}}
 
-" NEOCOMPLETE"{{{
-if s:meet_neocomplete_requirements()
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-  let g:neocomplete#enable_auto_close_preview = 1
-  " disable preview pane
-  set completeopt-=preview
-
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  " inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return neocomplete#smart_close_popup() . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-  endfunction
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-y>  neocomplete#close_popup()
-  inoremap <expr><C-e>  neocomplete#cancel_popup()
-  " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-  " For cursor moving in insert mode(Not recommended)
-  " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-  " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-  " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-  " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-
-  " " Or set this.
-  " let g:neocomplete#enable_cursor_hold_i = 1
-  " " Or set this.
-  " let g:neocomplete#enable_insert_char_pre = 1
-
-  " " AutoComplPop like behavior.
-  " let g:neocomplete#enable_auto_select = 1
-  " " Shell like behavior(not recommended).
-  " set completeopt+=longest
-  " let g:neocomplete#enable_auto_select = 1
-  " let g:neocomplete#disable_auto_complete = 1
-  " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  " Python - jedi
-  autocmd FileType python setlocal omnifunc=jedi#completions
-  "let g:jedi#popup_select_first=0
-  let g:jedi#completions_enabled = 0
-  let g:jedi#auto_vim_configuration = 0
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-
-  if !exists('g:neocomplete#sources#omni#functions')
-    let g:neocomplete#sources#omni#functions = {}
-  endif
-
-  " Python - jedi
-  let g:neocomplete#force_omni_input_patterns.python =
-        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  let g:neocomplete#sources#omni#input_patterns.php =
-        \ '[^. \t]->\h\w*\|\h\w*::'
-
-  " FOR clang_complete settings
-  " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-  let g:neocomplete#force_overwrite_completefunc = 1
-  let g:neocomplete#force_omni_input_patterns.c =
-        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-  let g:neocomplete#force_omni_input_patterns.cpp =
-        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-  let g:neocomplete#force_omni_input_patterns.objc =
-        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-  let g:neocomplete#force_omni_input_patterns.objcpp =
-        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-  let g:clang_complete_auto = 0
-  let g:clang_auto_select = 0
-  if has("mac")
-    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
-  endif
-  let g:clang_use_library = 1
-
-  "For External plugin's completion
-  " Go (plugin: gocode)
-  let g:neocomplete#sources#omni#functions.go =
-  \ 'gocomplete#Complete'
-  " Clojure (plugin: vim-clojure)
-  let g:neocomplete#sources#omni#functions.clojure =
-  \ 'vimclojure#OmniCompletion'
-  " SQL
-  let g:neocomplete#sources#omni#functions.sql =
-  \ 'sqlcomplete#Complete'
-  " R (plugin: vim-R-plugin)
-  let g:neocomplete#sources#omni#input_patterns.r =
-  \ '[[:alnum:].\\]\+'
-  let g:neocomplete#sources#omni#functions.r =
-  \ 'rcomplete#CompleteR'
-  " Rmd (plugin: vim-R-plugin)
-  let g:neocomplete#sources#omni#input_patterns.rmd =
-  \ '[[:alnum:].\\]\+'
-  let g:neocomplete#sources#omni#functions.rmd =
-  \ 'rcomplete#CompleteR'
-  " XQuery (plugin: XQuery-indentomnicomplete)
-  let g:neocomplete#sources#omni#input_patterns.xquery =
-  \ '\k\|:\|\-\|&'
-  let g:neocomplete#sources#omni#functions.xquery =
-  \ 'xquerycomplete#CompleteXQuery'
-
-  " For perlomni.vim setting.
-  " https://github.com/c9s/perlomni.vim
-  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-  let g:neocomplete#force_omni_input_patterns.javascript = '[^. \t]\.\w*'
-  let g:node_usejscomplete = 1
-endif
-"}}}
-"
 " neosnippet "{{{
 " <C-J> にマッピング. スニペット補完
 " Plugin key-mappings.
@@ -672,42 +291,6 @@ endif
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
 
-" バッファ一覧
-noremap <C-k><C-B> :<C-u>Unite buffer<CR>
-" ファイル一覧
-noremap <C-k><C-f> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" 最近使ったファイルの一覧
-noremap <C-k><C-N> :<C-u>Unite file_mru<CR>
-" レジスタ一覧
-noremap <C-k><C-R> :<C-u>Unite -buffer-name=register register<CR>
-" ファイルとバッファ
-noremap <C-k><C-k> :<C-u>Unite buffer file_mru<CR>
-" 全部
-noremap <C-k><C-A> :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-" キーマップを表示
-noremap <C-k><C-M> :<C-u>Unite mapping<CR>
-" スクリプトを表示
-noremap <C-k>s :<C-u>Unite scriptnames<CR>
-" コマンドを表示
-noremap <C-k>c :<C-u>Unite command<CR>
-" ヤンクヒストリ
-noremap <C-k><C-y> :<C-u>Unite history/yank<CR>
-" ヘルプ参照
-noremap <C-k><C-h> :<C-u>Unite help<CR>
-" pydoc
-noremap <C-k><C-d> :<C-u>Unite ref/pydoc<CR>
-" カラースキーム
-noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
-" スニペット
-imap <C-k><C-i> <Plug>(neosnippet_start_unite_snippet)
-" todo
-noremap <C-k><C-t> :<C-u>Unite tweetvim<CR>
-" let g:unite_todo_note_suffix="md"
-" Spotlight
-noremap <C-k><C-p> :<C-u>Unite spotlight<CR>
-" Outline
-noremap <C-k><C-o> :<C-u>Unite outline<CR>
-" unite-tag
 autocmd BufEnter *
 \   if empty(&buftype)
 \|      nnoremap <buffer> <C-]> :<C-u>UniteWithCursorWord -immediately tag<CR>
@@ -729,39 +312,19 @@ function! s:unite_my_settings()
 " Overwrite settings.
 endfunction"}}}
 
-" colorscheme Settings"{{{
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_degrade=0
-let g:solarized_bold=1
-let g:solarized_underline=1
-let g:solarized_italic=1
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-set background=dark
-colorscheme solarized
-call togglebg#map("")
-" autocmd BufWinEnter,TabEnter,FileType *
-"       \ if &ft!='python' |
-"       \  let g:solarized_termcolors=256 |
-"       \  let g:solarized_termtrans=1 |
-"       \  let g:solarized_degrade=0 |
-"       \  let g:solarized_bold=1 |
-"       \  let g:solarized_underline=1 |
-"       \  let g:solarized_italic=1 |
-"       \  let g:solarized_contrast="high" |
-"       \  let g:solarized_visibility="high" |
-"       \  set background=dark |
-"       \  colorscheme solarized |
-"       \ else |
-"       \   let g:molokai_original=0 |
-"       \   let g:rehash256=0 |
-"       \   colorscheme molokai |
-"       \   set bg=dark |
-"       \   set bg=light |
-"       \ endif
-"
-"}}}
+" " colorscheme Settings"{{{
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" let g:solarized_degrade=0
+" let g:solarized_bold=1
+" let g:solarized_underline=1
+" let g:solarized_italic=1
+" let g:solarized_contrast="high"
+" let g:solarized_visibility="high"
+" set background=dark
+" colorscheme solarized
+" call togglebg#map("")
+" "}}}
 
 " foldCC Setings"{{{
 set foldtext=FoldCCtext()
@@ -972,30 +535,25 @@ function! MyMode()
 endfunction
 "}}}
 
-" VimRepress Settings"{{{
-function! VimpressSetting()
-  BlogList
-endfunction"}}}
-
-" vim-session"{{{
-" 現在のディレクトリ直下の .vimsessions/ を取得
-let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-" 存在すれば
-if isdirectory(s:local_session_directory)
-  " session保存ディレクトリをそのディレクトリの設定
-  let g:session_directory = s:local_session_directory
-  " vimを辞める時に自動保存
-  let g:session_autosave = 'yes'
-  " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
-  let g:session_autoload = 'yes'
-  " 1分間に1回自動保存
-  let g:session_autosave_periodic = 30
-else
-  let g:session_autosave = 'no'
-  let g:session_autoload = 'no'
-endif
-unlet s:local_session_directory
-"}}}
+" " vim-session"{{{
+" " 現在のディレクトリ直下の .vimsessions/ を取得
+" let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+" " 存在すれば
+" if isdirectory(s:local_session_directory)
+"   " session保存ディレクトリをそのディレクトリの設定
+"   let g:session_directory = s:local_session_directory
+"   " vimを辞める時に自動保存
+"   let g:session_autosave = 'yes'
+"   " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+"   let g:session_autoload = 'yes'
+"   " 1分間に1回自動保存
+"   let g:session_autosave_periodic = 30
+" else
+"   let g:session_autosave = 'no'
+"   let g:session_autoload = 'no'
+" endif
+" unlet s:local_session_directory
+" "}}}
 
 " vimux settings"{{{
 " Prompt for a command to run

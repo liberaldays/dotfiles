@@ -5,6 +5,7 @@ _vim/.DS_Store
 _vim/bundle/
 _vim/old_bundle/
 _vim/old_neobundle/
+_vim/dein/
 .gitold
 *~
 *.swp
