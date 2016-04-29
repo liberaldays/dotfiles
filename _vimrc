@@ -312,19 +312,19 @@ function! s:unite_my_settings()
 " Overwrite settings.
 endfunction"}}}
 
-" " colorscheme Settings"{{{
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=1
-" let g:solarized_degrade=0
-" let g:solarized_bold=1
-" let g:solarized_underline=1
-" let g:solarized_italic=1
-" let g:solarized_contrast="high"
-" let g:solarized_visibility="high"
-" set background=dark
-" colorscheme solarized
-" call togglebg#map("")
-" "}}}
+" colorscheme Settings"{{{
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_underline=1
+let g:solarized_italic=1
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+set background=dark
+colorscheme solarized
+call togglebg#map("")
+"}}}
 
 " foldCC Setings"{{{
 set foldtext=FoldCCtext()
