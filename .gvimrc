@@ -13,8 +13,8 @@ set visualbell t_vb=
 set nowrapscan
 set columns=163
 set lines=75
-set guifontwide=Ricty:h15
-set guifont=Ricty:h15
+set guifontwide=Ricty:h14
+set guifont=Ricty:h14
 
 colorscheme solarized
 let g:solarized_termtrans=0

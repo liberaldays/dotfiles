@@ -1,0 +1,398 @@
+[[plugins]]
+repo = 'Shougo/tabpagebuffer.vim'
+on_if = 'tabpagenr() > 1'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_if = 1
+
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+depends = 'context_filetype.vim'
+if = "has('lua')"
+on_event = 'InsertEnter'
+hook_source = '''
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  let g:neocomplete#enable_auto_close_preview = 1
+  " disable preview pane
+  set completeopt-=preview
+
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  " inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return neocomplete#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h>  neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS>   neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y>  neocomplete#close_popup()
+  inoremap <expr><C-e>  neocomplete#cancel_popup()
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+  " For cursor moving in insert mode(Not recommended)
+  " inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+  " inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+  " inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+  " inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
+
+  " " Or set this.
+  " let g:neocomplete#enable_cursor_hold_i = 1
+  " " Or set this.
+  " let g:neocomplete#enable_insert_char_pre = 1
+
+  " " AutoComplPop like behavior.
+  " let g:neocomplete#enable_auto_select = 1
+  " " Shell like behavior(not recommended).
+  " set completeopt+=longest
+  " let g:neocomplete#enable_auto_select = 1
+  " let g:neocomplete#disable_auto_complete = 1
+  " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  " Python - jedi
+  autocmd FileType python setlocal omnifunc=jedi#completions
+  "let g:jedi#popup_select_first=0
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+  endif
+
+  if !exists('g:neocomplete#sources#omni#functions')
+    let g:neocomplete#sources#omni#functions = {}
+  endif
+
+  " Python - jedi
+  let g:neocomplete#force_omni_input_patterns.python =
+        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  let g:neocomplete#sources#omni#input_patterns.php =
+        \ '[^. \t]->\h\w*\|\h\w*::'
+
+  " FOR clang_complete settings
+  " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+  let g:neocomplete#force_overwrite_completefunc = 1
+  let g:neocomplete#force_omni_input_patterns.c =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  let g:neocomplete#force_omni_input_patterns.cpp =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  let g:neocomplete#force_omni_input_patterns.objc =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+  let g:neocomplete#force_omni_input_patterns.objcpp =
+        \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  let g:clang_complete_auto = 0
+  let g:clang_auto_select = 0
+  if has("mac")
+    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+  endif
+  let g:clang_use_library = 1
+
+  "For External plugin's completion
+  " Go (plugin: gocode)
+  let g:neocomplete#sources#omni#functions.go =
+  \ 'gocomplete#Complete'
+  " Clojure (plugin: vim-clojure)
+  let g:neocomplete#sources#omni#functions.clojure =
+  \ 'vimclojure#OmniCompletion'
+  " SQL
+  let g:neocomplete#sources#omni#functions.sql =
+  \ 'sqlcomplete#Complete'
+  " R (plugin: vim-R-plugin)
+  let g:neocomplete#sources#omni#input_patterns.r =
+  \ '[[:alnum:].\\]\+'
+  let g:neocomplete#sources#omni#functions.r =
+  \ 'rcomplete#CompleteR'
+  " Rmd (plugin: vim-R-plugin)
+  let g:neocomplete#sources#omni#input_patterns.rmd =
+  \ '[[:alnum:].\\]\+'
+  let g:neocomplete#sources#omni#functions.rmd =
+  \ 'rcomplete#CompleteR'
+  " XQuery (plugin: XQuery-indentomnicomplete)
+  let g:neocomplete#sources#omni#input_patterns.xquery =
+  \ '\k\|:\|\-\|&'
+  let g:neocomplete#sources#omni#functions.xquery =
+  \ 'xquerycomplete#CompleteXQuery'
+
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+  let g:neocomplete#force_omni_input_patterns.javascript = '[^. \t]\.\w*'
+  let g:node_usejscomplete = 1
+'''
+
+[[plugins]]
+repo = 'Rip-Rip/clang_complete'
+on_ft = 'c'
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets', 'context_filetype.vim']
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+hook_add = '''
+  " バッファ一覧
+  noremap <C-k><C-B> :<C-u>Unite buffer<CR>
+  " ファイル一覧
+  noremap <C-k><C-f> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+  " 最近使ったファイルの一覧
+  noremap <C-k><C-N> :<C-u>Unite file_mru<CR>
+  " レジスタ一覧
+  noremap <C-k><C-R> :<C-u>Unite -buffer-name=register register<CR>
+  " ファイルとバッファ
+  noremap <C-k><C-k> :<C-u>Unite buffer file_mru<CR>
+  " 全部
+  noremap <C-k><C-A> :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+  " キーマップを表示
+  noremap <C-k><C-M> :<C-u>Unite mapping<CR>
+  " スクリプトを表示
+  noremap <C-k>s :<C-u>Unite scriptnames<CR>
+  " コマンドを表示
+  noremap <C-k>c :<C-u>Unite command<CR>
+  " ヤンクヒストリ
+  noremap <C-k><C-y> :<C-u>Unite history/yank<CR>
+  " ヘルプ参照
+  noremap <C-k><C-h> :<C-u>Unite help<CR>
+  " pydoc
+  noremap <C-k><C-d> :<C-u>Unite ref/pydoc<CR>
+  " カラースキーム
+  noremap <C-k><C-l> :<C-u>Unite colorscheme<CR>
+  " スニペット
+  imap <C-k><C-i> <Plug>(neosnippet_start_unite_snippet)
+  " todo
+  noremap <C-k><C-t> :<C-u>Unite tweetvim<CR>
+  " let g:unite_todo_note_suffix="md"
+  " Spotlight
+  noremap <C-k><C-p> :<C-u>Unite spotlight<CR>
+  " Outline
+  noremap <C-k><C-o> :<C-u>Unite outline<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_if = 1
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'tsukkee/unite-tag'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'Shougo/unite-help'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'choplin/unite-spotlight'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'kannokanno/unite-todo'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+on_source = 'unite.vim'
+
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+depends = 'unite.vim'
+on_map = [['n', '<Plug>']]
+on_if = "isdirectory(bufname('%'))"
+hook_add = '''
+nnoremap <silent>   [Space]v   :<C-u>VimFiler -invisible<CR>
+nnoremap <Leader>e :VimFilerExplorer<CR>
+'''
+hook_source = '''
+autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
+" let g:vimfiler_as_default_explorer = 1
+" let g:vimfiler_enable_auto_cd = 1
+" Edit file by tabedit.
+let g:vimfiler_edit_action = 'tabopen'
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+'''
+
+[[plugins]]
+repo = 'Shougo/vimshell.vim'
+on_map = [['n', '<Plug>']]
+hook_add = '''
+ nmap [Space]s  <Plug>(vimshell_switch)
+ nnoremap <silent> \is :VimShell<CR>
+ nnoremap <silent> \isp :VimShellPop<CR>
+ " \ipy: ipythonを非同期で起動
+ nnoremap <silent> \ip :VimShellInteractive ipython-2.7 console<CR>
+" \irb: irbを非同期で起動
+ nnoremap <silent> \irb :VimShellInteractive irb<CR>
+" \irr: Rを非同期で起動
+ nnoremap <silent> \irr :VimShellInteractive r<CR>
+ " 選択中に\ss: 非同期で開いたインタプリタに選択行を評価させる
+ vnoremap \ss :VimShellSendString<CR>
+ " \ss: 非同期で開いたインタプリタに現在の行を評価させる
+ nnoremap <silent> \ss <S-v>:VimShellSendString<CR>"}}}
+'''
+hook_source = 'source ~/.vim/rc/plugins/vimshell.rc.vim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+on_source = ['neocomplete.vim', 'deoplete.nvim']
+
+[[plugins]]
+repo = 'vim-jp/vital.vim'
+
+[[plugins]]
+repo = 'LeafCage/foldCC'
+on_ft = 'vim'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_map = [['n', '<Plug>']]
+hook_add = 'nmap <silent> <Leader>r <Plug>(quickrun)'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'alfredodeza/pytest.vim'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'tell-k/vim-autopep8'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'hdima/python-syntax'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_ft = 'python'
+
+[[plugins]]
+repo = 'jszakmeister/markdown2ctags'
+on_source = 'vim-markdown'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_map = [['n', '<Plug>']]
+
+[[plugins]]
+repo = 'rhysd/vim-operator-surround'
+depends = 'vim-operator-user'
+on_map = [['n', '<Plug>']]
+
+
+[[plugins]]
+repo = 'artur-shaik/vim-javacomplete2'
+on_ft = 'java'
+hook_source = '''
+  autocmd MyAutoCmd FileType java setlocal omnifunc=javacomplete#Complete
+'''
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'thinca/vim-scouter'
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+on_map = [['nx', '<Plug>']]
+hook_add = '''
+  function! InitCaw() abort
+    if !&l:modifiable
+      silent! nunmap <buffer> gc
+      silent! xunmap <buffer> gc
+      silent! nunmap <buffer> gcc
+      silent! xunmap <buffer> gcc
+    else
+      nmap <buffer> gc <Plug>(caw:prefix)
+      xmap <buffer> gc <Plug>(caw:prefix)
+      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+    endif
+  endfunction
+  autocmd MyAutoCmd FileType * call InitCaw()
+'''
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+on_ft = ['c','r','php','go','ruby', 'python']
+
+[[plugins]]
+repo = 'osyo-manga/vital-over'
+on_source = 'incsearch.vim'
+
+[[plugins]]
+repo = 'kannokanno/previm'
+# on_ft = ['markdown', 'rst', 'mkd']
+on_cmd = 'PrevimOpen'
+depends = 'open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/eskk.vim'
+on_map = [['i', '<Plug>'], ['c', '<Plug>']]
+hook_add = '''
+  imap <C-j>     <Plug>(eskk:toggle)
+  cmap <C-j>     <Plug>(eskk:toggle)
+'''

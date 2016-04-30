@@ -1,12 +1,16 @@
 {
 	"segments": {
 		"right": [
+			{
+				"function": "powerline.segments.common.net.network_load",
+				"priority": 10
+			},
       {
-          "function": "powerlinemem.mem_usage.mem_usage_percent",
-          "priority": 50,
-          "args": {
-            "format": "Mem:%d%%"
-          }
+        "function": "powerlinemem.mem_usage.mem_usage_percent",
+        "priority": 50,
+        "args": {
+          "format": "Mem:%d%%"
+        }
       },
 			{
 				"function": "powerline.segments.common.sys.system_load",
@@ -15,7 +19,7 @@
 			{
 				"function": "powerline.segments.common.wthr.weather",
 				"name": "weather",
-				"priority": 50,
+				"priority": 40,
 				"args": {
 					"unit": "C",
 					"location_query": "Tokyo, Japan",

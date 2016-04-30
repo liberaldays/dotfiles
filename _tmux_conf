@@ -27,7 +27,7 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 ## tmux-prompt# {{{
 # tmux-powerline
 run-shell "powerline-daemon -q"
-source "/Users/haco/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf"
+source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf
 # set-option -g status on
 # set-option -g status-interval 2
 # set-option -g status-utf8 on

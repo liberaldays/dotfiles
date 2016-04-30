@@ -7,6 +7,13 @@ setl autoindent
 setl smartindent
 setl cindent
 
+" set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set showtabline=4
+set autoindent
+
 " Vim-R-plugin
 let vimrplugin_vsplit = 1
 let g:vimrplugin_assign = 0
